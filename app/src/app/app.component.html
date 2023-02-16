@@ -1,2 +1,7 @@
+{{integrationData.value.date}}
+
+<div *ngFor="let tour of integrationData.value.tournaments">
+  {{tour.id}} - {{tour.name}}
+</div>
 
 <router-outlet></router-outlet>
