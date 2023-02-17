@@ -1,4 +1,8 @@
-{{integrationData.value.date}}
+<button mat-mini-fab color="primary" aria-label="Refresh" (click)="updateData()">
+  <mat-icon>refresh</mat-icon>
+</button>
+
+{{integrationData.value.date | date:'mediumTime' }}
 
 <app-tournament (launchIntegration)="updateData()"></app-tournament>
 
