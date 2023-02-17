@@ -9,3 +9,7 @@
   <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Add</button>
 
 </form>
+
+<div *ngFor="let tour of data?.tournaments">
+  {{tour.id}} - {{tour.name}}
+</div>

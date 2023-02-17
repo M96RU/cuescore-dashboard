@@ -4,12 +4,10 @@
 
 {{integrationData.value.date | date:'mediumTime' }}
 
-<app-tournament (launchIntegration)="updateData()"></app-tournament>
+<app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
 
-<div *ngFor="let tour of integrationData.value.tournaments">
-  {{tour.id}} - {{tour.name}}
-</div>
+<app-table [data]="integrationData.value"></app-table>
 
-{{integrationData.value | json}}
+<!--{{integrationData.value | json}}-->
 
 <router-outlet></router-outlet>

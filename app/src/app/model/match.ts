@@ -1,10 +1,13 @@
-import {Player} from 'src/app/model/player';
-
 export class Match {
-  id: string = "";
-  tableId: string | undefined
-  playerAid: string | undefined
-  playerAscore: number = 0
-  playerBid: string | undefined
-  playerBscore: number = 0
+  id: string = '';
+  status: string | undefined;
+  tableNum: number | undefined;
+  playerAid: string | undefined;
+  playerAname: string | undefined;
+  playerAscore: number = 0;
+  playerBid: string | undefined;
+  playerBname: string | undefined;
+  playerBscore: number = 0;
+  startTime: Date | undefined;
+  finishedTime: Date | undefined;
 }

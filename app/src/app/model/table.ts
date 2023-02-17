@@ -1,5 +1,10 @@
 
 export class Table {
-  id: string = "";
-  name: string = "";
+
+  constructor(num: number) {
+    this.num = num;
+  }
+
+  num: number;
+  tableId: string | undefined; // cuescore identifier
 }

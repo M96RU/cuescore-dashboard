@@ -12,11 +12,13 @@ import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TournamentComponent} from './tournament/tournament.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TournamentComponent
+    TournamentComponent,
+    TableComponent
   ],
   imports: [
     /**

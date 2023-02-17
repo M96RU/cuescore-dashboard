@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import * as moment from 'moment';
 import {forkJoin, map, Observable} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {Match} from 'src/app/model/match';
@@ -32,9 +33,9 @@ export class IntegrationService {
 
   parseTable(cuescore: any): Table | null {
     if (cuescore && cuescore.tableId > 0) {
-      const table = new Table();
-      table.id = cuescore.tableId;
-      table.name = cuescore.name; // description ?
+      const tableNum = parseInt(cuescore.name); // description for name ?
+      const table = new Table(tableNum);
+      table.tableId = cuescore.tableId;
       return table;
     } else {
       return null
@@ -44,7 +45,7 @@ export class IntegrationService {
   retrieveIntegrationData(): Observable<IntegrationData> {
 
     const players: Map<string, Player> = new Map();
-    const tables: Map<string, Table> = new Map();
+    const tables: Map<number, Table> = new Map();
 
     return forkJoin(this.tournamentService.getTournaments().map(id => this.tournamentService.getCuescoreTournament(id))).pipe(
       map((responses) => {
@@ -64,11 +65,20 @@ export class IntegrationService {
                 match.id = cuescoreMatch.matchId;
                 match.playerAscore = cuescoreMatch.scoreA;
                 match.playerBscore = cuescoreMatch.scoreB;
+                match.status = cuescoreMatch.matchstatus;
+                if (cuescoreMatch.starttime) {
+
+                  match.startTime = moment.utc(cuescoreMatch.starttime).toDate();
+                }
+                if (cuescoreMatch.stoptime) {
+                  match.finishedTime = moment.utc(cuescoreMatch.stoptime).toDate();
+                }
 
                 // Players
                 const playerA = this.parsePlayer(cuescoreMatch.playerA);
                 if (playerA) {
                   match.playerAid = playerA.id;
+                  match.playerAname = playerA.name;
                   if (!players.has(playerA.id)) {
                     players.set(playerA.id, playerA);
                   }
@@ -76,6 +86,7 @@ export class IntegrationService {
                 const playerB = this.parsePlayer(cuescoreMatch.playerB);
                 if (playerB) {
                   match.playerBid = playerB.id;
+                  match.playerBname = playerB.name;
                   if (!players.has(playerB.id)) {
                     players.set(playerB.id, playerB);
                   }
@@ -83,9 +94,9 @@ export class IntegrationService {
 
                 const table = this.parseTable(cuescoreMatch.table)
                 if (table) {
-                  match.tableId = table.id;
-                  if (!tables.has(table.id)) {
-                    tables.set(table.id, table);
+                  match.tableNum = table.num;
+                  if (!tables.has(table.num)) {
+                    tables.set(table.num, table);
                   }
                 }
 

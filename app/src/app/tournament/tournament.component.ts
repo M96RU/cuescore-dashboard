@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {IntegrationData} from 'src/app/integration/integration-data';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
 @Component({
@@ -11,6 +12,9 @@ export class TournamentComponent implements OnInit {
 
   @Output()
   launchIntegration = new EventEmitter<boolean>();
+
+  @Input()
+  data: IntegrationData | undefined;
 
   form: FormGroup;
 

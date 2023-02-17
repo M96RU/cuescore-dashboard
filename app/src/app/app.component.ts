@@ -22,7 +22,7 @@ export class AppComponent implements OnDestroy {
     this.updateData();
 
     // periodical updates
-    this.integrationSubscription = interval(10000).subscribe(() => {
+    this.integrationSubscription = interval(60000).subscribe(() => {
       this.updateData();
     });
   }
