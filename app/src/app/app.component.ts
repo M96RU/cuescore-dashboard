@@ -19,15 +19,11 @@ export class AppComponent implements OnDestroy {
   ) {
 
     // first init
-    this.integrationService.retrieveIntegrationData().subscribe(update => {
-      this.integrationData.next(update);
-    });
+    this.updateData();
 
     // periodical updates
     this.integrationSubscription = interval(10000).subscribe(() => {
-      this.integrationService.retrieveIntegrationData().subscribe(update => {
-        this.integrationData.next(update);
-      });
+      this.updateData();
     });
   }
 
@@ -35,5 +31,12 @@ export class AppComponent implements OnDestroy {
     if (this.integrationSubscription) {
       this.integrationSubscription.unsubscribe()
     }
+  }
+
+  updateData() {
+    this.integrationService.retrieveIntegrationData().subscribe(update => {
+      this.integrationData.next(update);
+    });
+
   }
 }

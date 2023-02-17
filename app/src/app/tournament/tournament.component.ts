@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
@@ -8,6 +8,9 @@ import {TournamentService} from 'src/app/tournament/tournament.service';
   styleUrls: ['./tournament.component.scss']
 })
 export class TournamentComponent implements OnInit {
+
+  @Output()
+  launchIntegration = new EventEmitter<boolean>();
 
   form: FormGroup;
 
@@ -32,6 +35,7 @@ export class TournamentComponent implements OnInit {
           if (response.tournamentId) {
             this.tournamentService.addTournamentId(response.tournamentId);
             this.form.reset();
+            this.launchIntegration.emit(true);
           }
         },
         error: err => {

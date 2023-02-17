@@ -1,6 +1,6 @@
 {{integrationData.value.date}}
 
-<app-tournament></app-tournament>
+<app-tournament (launchIntegration)="updateData()"></app-tournament>
 
 <div *ngFor="let tour of integrationData.value.tournaments">
   {{tour.id}} - {{tour.name}}
