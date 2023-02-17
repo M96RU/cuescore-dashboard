@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+
+  <mat-form-field>
+    <mat-label>ID</mat-label>
+    <input matInput formControlName="id" placeholder="1996">
+    <mat-error>Error field</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Add</button>
+
+</form>
