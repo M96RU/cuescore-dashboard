@@ -23,15 +23,21 @@ export class ScheduleComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
+    const matchesWithDuplicatedPlayerTmp: Match[] = [];
+    const matchesWithoutDuplicatedPlayerTmp: Match[] = [];
+
     this.data?.matches.forEach(match => {
       if (match.status != 'finished' && !match.tableNum) {
         if (match.playerAduplicated || match.playerBduplicated) {
-          this.matchesWithDuplicatedPlayer.push(match);
+          matchesWithDuplicatedPlayerTmp.push(match);
         } else if (match.playerAid || match.playerBid) {
-          this.matchesWithoutDuplicatedPlayer.push(match);
+          matchesWithoutDuplicatedPlayerTmp.push(match);
         }
       }
     });
+
+    this.matchesWithDuplicatedPlayer = matchesWithDuplicatedPlayerTmp;
+    this.matchesWithoutDuplicatedPlayer = matchesWithoutDuplicatedPlayerTmp;
   }
 
 }
