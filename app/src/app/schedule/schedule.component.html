@@ -1,0 +1,10 @@
+<div class="schedule-content">
+  <div class="schedule-matches">
+    Matches with duplicated
+    <app-match [match]="match" *ngFor="let match of matchesWithDuplicatedPlayer"></app-match>
+  </div>
+  <div class="schedule-matches">
+    Matches without duplicated
+    <app-match [match]="match" *ngFor="let match of matchesWithoutDuplicatedPlayer"></app-match>
+  </div>
+</div>
