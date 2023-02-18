@@ -1,0 +1,22 @@
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  width: fit-content;
+}
+
+.refresh-container {
+  cursor: pointer;
+  background-color: #172266;
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+  width: fit-content;
+  margin: 5px;
+}
+
+app-table {
+  width: 500px;
+}

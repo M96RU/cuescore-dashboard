@@ -1,0 +1,47 @@
+.match-container {
+  margin: 5px;
+}
+
+.match-status-waiting {
+  background-color: #E7EBF6;
+}
+
+.match-status-playing {
+  color: white;
+  background-color: #467DF7;
+}
+
+.match-status-finished {
+  color: white;
+  background-color: #172266;
+}
+
+.match-container-title {
+  float: left;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.match-container-status {
+  text-align: right;
+  font-size: smaller;
+}
+
+.match-container-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.match-player {
+  width: 45%;
+}
+.match-player-a {
+  text-align: right;
+}
+.match-player-b {
+  text-align: left;
+}
+.match-score {
+  width: 5%;
+  text-align: center;
+}
