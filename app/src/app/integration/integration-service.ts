@@ -66,6 +66,9 @@ export class IntegrationService {
                 match.playerAscore = cuescoreMatch.scoreA;
                 match.playerBscore = cuescoreMatch.scoreB;
                 match.status = cuescoreMatch.matchstatus;
+                match.tournament = tournament.name;
+                match.round = cuescoreMatch.roundName;
+                match.order = cuescoreMatch.matchno;
                 if (cuescoreMatch.starttime) {
 
                   match.startTime = moment.utc(cuescoreMatch.starttime).toDate();

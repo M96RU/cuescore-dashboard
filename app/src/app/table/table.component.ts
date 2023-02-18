@@ -43,7 +43,6 @@ export class TableComponent implements OnInit, OnChanges {
           tableMatches.push(match);
           playingMatchesTables.set(match.tableNum, tableMatches);
         }
-
       }
     });
 

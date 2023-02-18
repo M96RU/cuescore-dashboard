@@ -11,14 +11,16 @@ import {IntegrationService} from 'src/app/integration/integration-service';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {MatchComponent} from './match/match.component';
+import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
-import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TournamentComponent,
-    TableComponent
+    TableComponent,
+    MatchComponent
   ],
   imports: [
     /**

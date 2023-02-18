@@ -2,11 +2,13 @@
   <mat-icon>refresh</mat-icon>
 </button>
 
+<app-table [data]="integrationData.value"></app-table>
+
 {{integrationData.value.date | date:'mediumTime' }}
 
 <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
 
-<app-table [data]="integrationData.value"></app-table>
+
 
 <!--{{integrationData.value | json}}-->
 
