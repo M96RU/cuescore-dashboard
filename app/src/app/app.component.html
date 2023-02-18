@@ -1,15 +1,16 @@
-<button mat-mini-fab color="primary" aria-label="Refresh" (click)="updateData()">
-  <mat-icon>refresh</mat-icon>
-</button>
+<div class="content">
 
-<app-table [data]="integrationData.value"></app-table>
+  <div class="menu">
+    <div class="refresh-container" (click)="updateData()">
+      Last update : {{integrationData.value.date | date:'mediumTime' }}
+      <mat-icon color="primary">refresh</mat-icon>
+      Refresh
+    </div>
+    <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
+  </div>
 
-{{integrationData.value.date | date:'mediumTime' }}
+  <app-table [data]="integrationData.value"></app-table>
+</div>
 
-<app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
-
-
-
-<!--{{integrationData.value | json}}-->
 
 <router-outlet></router-outlet>

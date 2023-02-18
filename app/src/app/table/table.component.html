@@ -1,11 +1,11 @@
 <div class="table-container" *ngFor="let table of tables | keyvalue">
   <div class="table-num">{{table.key}}</div>
-  <div class="match-warning" [hidden]="table.value.length > 0">
+  <div class="table-warning" [hidden]="table.value.length > 0">
     <mat-icon color="warn">warning</mat-icon>
     No match in progress on table {{table.key}}
   </div>
   <div class="table-matches" [hidden]="table.value.length == 0">
-    <div class="match-warning" *ngIf="table.value.length>1">
+    <div class="table-warning" *ngIf="table.value.length>1">
       <mat-icon color="warn">warning</mat-icon>
       More than one match launched on table {{table.key}}
     </div>
