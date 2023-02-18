@@ -14,13 +14,15 @@ import {AppComponent} from './app.component';
 import {MatchComponent} from './match/match.component';
 import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TournamentComponent,
     TableComponent,
-    MatchComponent
+    MatchComponent,
+    ScheduleComponent
   ],
   imports: [
     /**
