@@ -67,7 +67,6 @@ export class IntegrationService {
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
                 if (cuescoreMatch.starttime) {
-
                   match.startTime = moment.utc(cuescoreMatch.starttime).toDate();
                 }
                 if (cuescoreMatch.stoptime) {
@@ -91,6 +90,8 @@ export class IntegrationService {
                       players.set(existingPlayer.id, existingPlayer);
                     }
                   }
+                } else {
+                  match.playerAname = cuescoreMatch.playerA?.name;
                 }
                 const playerB = this.parsePlayer(cuescoreMatch.playerB);
                 if (playerB) {
@@ -108,6 +109,8 @@ export class IntegrationService {
                       players.set(existingPlayer.id, existingPlayer);
                     }
                   }
+                } else {
+                  match.playerBname = cuescoreMatch.playerB?.name;
                 }
 
                 const table = this.parseTable(cuescoreMatch.table)
@@ -131,6 +134,11 @@ export class IntegrationService {
               if (playerA) {
                 const playingMatches = playerA.matches.filter(match => match.status != 'finished');
                 match.playerAduplicated = playingMatches.length > 1;
+
+                if (playingMatches.length > 0) {
+                  const first = playingMatches[0];
+                  match.playerAtable = first.tableNum;
+                }
               }
             }
             if (match.playerBid) {
@@ -138,6 +146,11 @@ export class IntegrationService {
               if (playerB) {
                 const playingMatches = playerB.matches.filter(match => match.status != 'finished');
                 match.playerBduplicated = playingMatches.length > 1;
+
+                if (playingMatches.length > 0) {
+                  const first = playingMatches[0];
+                  match.playerBtable = first.tableNum;
+                }
               }
             }
             integrationData.matches.push(match);

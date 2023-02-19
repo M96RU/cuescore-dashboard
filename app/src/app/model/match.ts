@@ -8,11 +8,13 @@ export class Match {
   playerAid: string | undefined;
   playerAname: string | undefined;
   playerAduplicated: boolean = false;
+  playerAtable: number | undefined;
   playerAscore: number = 0;
   playerBid: string | undefined;
   playerBname: string | undefined;
   playerBscore: number = 0;
   playerBduplicated: boolean = false;
+  playerBtable: number | undefined;
   startTime: Date | undefined;
   finishedTime: Date | undefined;
 }
