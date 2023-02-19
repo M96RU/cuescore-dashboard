@@ -15,7 +15,7 @@ export class TournamentService {
 
   getTournaments(): string[] {
     const tournaments: string[] = [];
-    const joinedTournaments = localStorage.getItem('tournaments')
+    const joinedTournaments = localStorage.getItem('tournaments');
     if (joinedTournaments) {
       joinedTournaments.split('#').forEach(id => {
         tournaments.push(id);
@@ -36,7 +36,12 @@ export class TournamentService {
   removeTournamentId(tournamentId: string): void {
     const tournaments = this.getTournaments();
     const tournamentsWithoutOneToRemove = tournaments.filter(id => id != tournamentId);
-    localStorage.setItem('tournaments', tournamentsWithoutOneToRemove.join('#'));
+    if (tournamentsWithoutOneToRemove.length>0) {
+      localStorage.setItem('tournaments', tournamentsWithoutOneToRemove.join('#'));
+    } else {
+      localStorage.removeItem('tournaments');
+    }
+
   }
 
 }

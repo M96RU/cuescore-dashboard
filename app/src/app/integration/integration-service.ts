@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
-import {forkJoin, map, Observable} from 'rxjs';
+import {forkJoin, map, Observable, of} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {Match} from 'src/app/model/match';
 import {Player} from 'src/app/model/player';
@@ -42,11 +42,17 @@ export class IntegrationService {
 
   retrieveIntegrationData(): Observable<IntegrationData> {
 
+    const tournaments = this.tournamentService.getTournaments();
+
+    if (tournaments.length == 0) {
+      return of(new IntegrationData());
+    }
+
     const matches: Match[] = [];
     const players: Map<string, Player> = new Map();
     const tables: Map<number, Table> = new Map();
 
-    return forkJoin(this.tournamentService.getTournaments().map(id => this.tournamentService.getCuescoreTournament(id))).pipe(
+    return forkJoin(tournaments.map(id => this.tournamentService.getCuescoreTournament(id))).pipe(
       map((responses) => {
 
           const integrationData = new IntegrationData();
