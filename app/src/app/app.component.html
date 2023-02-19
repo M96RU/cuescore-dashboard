@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div class="refresh-container" (click)="updateData()">
-    Last update : {{integrationData.value.date | date:'mediumTime' }}
+    Last update : {{integrationData.value.date | date:'HH\'h\'mm' }}
     <mat-icon color="primary">refresh</mat-icon>
     Refresh
   </div>

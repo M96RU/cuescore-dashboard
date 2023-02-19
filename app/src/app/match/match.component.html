@@ -3,9 +3,9 @@
     {{match.tournament}} - {{match.round}} - {{match.order}}
   </div>
   <div class="match-container-status">
-    <span [hidden]="match.status !== 'finished'">Finished since {{match.finishedTime | date:'mediumTime'}}</span>
-    <span [hidden]="match.status !== 'playing'">In progress since {{match.startTime | date:'mediumTime'}}</span>
-    <span [hidden]="match.status !== 'waiting'">Waiting <span *ngIf="match.startTime"> - launched at {{match.startTime | date:'mediumTime'}}</span></span>
+    <span [hidden]="match.status !== 'finished'">Finished since {{match.finishedTime | date:'HH\'h\'mm'}}</span>
+    <span [hidden]="match.status !== 'playing'">In progress since {{match.startTime | date:'HH\'h\'mm'}}</span>
+    <span [hidden]="match.status !== 'waiting'">Waiting <span *ngIf="match.startTime"> - launched at {{match.startTime | date:'HH\'h\'mm'}}</span></span>
   </div>
   <div class="match-container-content match-status-{{match.status}}">
     <div class="match-player match-player-a"
