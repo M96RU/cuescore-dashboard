@@ -18,6 +18,17 @@ export class IntegrationService {
   ) {
   }
 
+  parseDateTime(datetime: any): Date | undefined {
+    if (datetime) {
+      if (datetime.includes('+') || datetime.includes('GMT')) {
+        // to check with real Data, seems not needed for French tournaments
+        return moment.utc(datetime).toDate();
+      }
+      return new Date(datetime);
+    }
+    return undefined;
+  }
+
   parsePlayer(cuescore: any): Player | null {
     if (cuescore && cuescore.playerId > 0 && cuescore.playerId != '1000615') {
       const player = new Player();
@@ -72,12 +83,8 @@ export class IntegrationService {
                 match.tournament = tournament.name;
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
-                if (cuescoreMatch.starttime) {
-                  match.startTime = moment.utc(cuescoreMatch.starttime).toDate();
-                }
-                if (cuescoreMatch.stoptime) {
-                  match.finishedTime = moment.utc(cuescoreMatch.stoptime).toDate();
-                }
+                match.startTime = this.parseDateTime(cuescoreMatch.starttime);
+                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime)
 
                 // Players
                 const playerA = this.parsePlayer(cuescoreMatch.playerA);
