@@ -2,9 +2,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntegrationService} from 'src/app/integration/integration-service';
@@ -12,9 +14,9 @@ import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MatchComponent} from './match/match.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatToolbarModule,
+    MatChipsModule
   ],
   providers: [
     IntegrationService,

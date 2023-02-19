@@ -24,13 +24,19 @@ export class TournamentService {
     return tournaments;
   }
 
-  addTournamentId(tournamentId: string) {
+  addTournamentId(tournamentId: string): void {
     const tournaments = this.getTournaments();
     const exists = tournaments.find(current => current == tournamentId);
     if (!exists) {
       tournaments.push(tournamentId);
       localStorage.setItem('tournaments', tournaments.join('#'));
     }
+  }
+
+  removeTournamentId(tournamentId: string): void {
+    const tournaments = this.getTournaments();
+    const tournamentsWithoutOneToRemove = tournaments.filter(id => id != tournamentId);
+    localStorage.setItem('tournaments', tournamentsWithoutOneToRemove.join('#'));
   }
 
 }

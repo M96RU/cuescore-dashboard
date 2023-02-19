@@ -1,15 +1,15 @@
-<form [formGroup]="form">
-
-  <mat-form-field>
-    <mat-label>ID</mat-label>
-    <input matInput formControlName="id" placeholder="1996">
-    <mat-error>Error field</mat-error>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" type="button" (click)="onSubmit()">Add</button>
-
-</form>
-
-<div *ngFor="let tour of data?.tournaments">
-  {{tour.id}} - {{tour.name}}
-</div>
+<mat-form-field class="example-chip-list" appearance="fill">
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip *ngFor="let tournament of data?.tournaments" (removed)="remove(tournament)">
+      {{tournament.name}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="Add tournament..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>
