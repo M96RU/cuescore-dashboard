@@ -52,9 +52,7 @@ export class IntegrationService {
           const integrationData = new IntegrationData();
 
           responses.forEach((response) => {
-            const tournament = new Tournament();
-            tournament.id = response.tournamentId;
-            tournament.name = response.name
+            const tournament = new Tournament(response.tournamentId, response.name, response.url);
             integrationData.tournaments.push(tournament);
 
             if (response.matches) {

@@ -1,7 +1,7 @@
 <mat-form-field class="example-chip-list" appearance="fill">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip *ngFor="let tournament of data?.tournaments" (removed)="remove(tournament)">
-      {{tournament.name}}
+      <span class="tournament-link" (click)="openTournament(tournament)">{{tournament.name}}</span>
       <button matChipRemove>
         <mat-icon>cancel</mat-icon>
       </button>

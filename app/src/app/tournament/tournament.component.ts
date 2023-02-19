@@ -54,4 +54,7 @@ export class TournamentComponent implements OnInit {
     this.launchIntegration.emit(true);
   }
 
+  openTournament(tournament: Tournament) {
+    window.open(tournament.url, tournament.name);
+  }
 }
