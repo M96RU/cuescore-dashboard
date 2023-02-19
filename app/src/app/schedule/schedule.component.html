@@ -1,10 +1,20 @@
 <div class="schedule-content">
-  <div class="schedule-matches">
-    Matches with duplicated
-    <app-match [match]="match" *ngFor="let match of matchesWithDuplicatedPlayer"></app-match>
-  </div>
-  <div class="schedule-matches">
-    Matches without duplicated
-    <app-match [match]="match" *ngFor="let match of matchesWithoutDuplicatedPlayer"></app-match>
-  </div>
+  <!--  <div class="schedule-matches">-->
+  <mat-card>
+    <mat-card-title>
+      Matches ready to play
+    </mat-card-title>
+    <mat-card-content>
+      <app-match [match]="match" *ngFor="let match of matchesWithDuplicatedPlayer"></app-match>
+    </mat-card-content>
+  </mat-card>
+  <!--  </div>-->
+  <mat-card>
+    <mat-card-title>
+      Matches waiting
+    </mat-card-title>
+    <mat-card-content>
+      <app-match [match]="match" *ngFor="let match of matchesWithoutDuplicatedPlayer"></app-match>
+    </mat-card-content>
+  </mat-card>
 </div>
