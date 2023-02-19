@@ -131,6 +131,11 @@ export class IntegrationService {
               if (playerA) {
                 const playingMatches = playerA.matches.filter(match => match.status != 'finished');
                 match.playerAduplicated = playingMatches.length > 1;
+
+                if (playingMatches.length > 0) {
+                  const first = playingMatches[0];
+                  match.playerAtable = first.tableNum;
+                }
               }
             }
             if (match.playerBid) {
@@ -138,6 +143,11 @@ export class IntegrationService {
               if (playerB) {
                 const playingMatches = playerB.matches.filter(match => match.status != 'finished');
                 match.playerBduplicated = playingMatches.length > 1;
+
+                if (playingMatches.length > 0) {
+                  const first = playingMatches[0];
+                  match.playerBtable = first.tableNum;
+                }
               }
             }
             integrationData.matches.push(match);

@@ -5,7 +5,9 @@
       Matches ready to play
     </mat-card-title>
     <mat-card-content>
-      <app-match [match]="match" *ngFor="let match of matchesWithDuplicatedPlayer"></app-match>
+      <div class="match-container" *ngFor="let match of matchesReadyToPlay">
+        <app-match [match]="match"></app-match>
+      </div>
     </mat-card-content>
   </mat-card>
   <!--  </div>-->
@@ -14,7 +16,9 @@
       Matches waiting
     </mat-card-title>
     <mat-card-content>
-      <app-match [match]="match" *ngFor="let match of matchesWithoutDuplicatedPlayer"></app-match>
+      <div class="match-container" *ngFor="let match of matchesWaitingForSomething">
+        <app-match [match]="match"></app-match>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

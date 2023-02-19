@@ -3,8 +3,13 @@
 }
 
 .match-player-duplicated {
-  background-color: yellow;
   font-weight: bold;
+  border: 3px black dotted;
+  border-radius: 5px;
+}
+
+.match-player-another-table {
+  background-color: red;
 }
 
 .match-status-waiting {
@@ -38,6 +43,7 @@
 }
 
 .match-player {
+  padding: 4px;
   width: 45%;
 }
 .match-player-a {
@@ -47,6 +53,7 @@
   text-align: left;
 }
 .match-score {
+  padding: 4px;
   width: 5%;
   text-align: center;
 }
