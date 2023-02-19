@@ -67,7 +67,6 @@ export class IntegrationService {
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
                 if (cuescoreMatch.starttime) {
-
                   match.startTime = moment.utc(cuescoreMatch.starttime).toDate();
                 }
                 if (cuescoreMatch.stoptime) {
@@ -91,6 +90,8 @@ export class IntegrationService {
                       players.set(existingPlayer.id, existingPlayer);
                     }
                   }
+                } else {
+                  match.playerAname = cuescoreMatch.playerA?.name;
                 }
                 const playerB = this.parsePlayer(cuescoreMatch.playerB);
                 if (playerB) {
@@ -108,6 +109,8 @@ export class IntegrationService {
                       players.set(existingPlayer.id, existingPlayer);
                     }
                   }
+                } else {
+                  match.playerBname = cuescoreMatch.playerB?.name;
                 }
 
                 const table = this.parseTable(cuescoreMatch.table)
