@@ -1,18 +1,15 @@
-<div class="content">
-
-  <div class="menu">
-    <div class="refresh-container" (click)="updateData()">
-      Last update : {{integrationData.value.date | date:'mediumTime' }}
-      <mat-icon color="primary">refresh</mat-icon>
-      Refresh
-    </div>
-    <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
+<mat-toolbar color="primary">
+  <div class="refresh-container" (click)="updateData()">
+    Last update : {{integrationData.value.date | date:'mediumTime' }}
+    <mat-icon color="primary">refresh</mat-icon>
+    Refresh
   </div>
+  <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
+</mat-toolbar>
 
+<div class="content">
   <app-table [data]="integrationData.value"></app-table>
-
   <app-schedule [data]="integrationData.value"></app-schedule>
 </div>
-
 
 <router-outlet></router-outlet>
