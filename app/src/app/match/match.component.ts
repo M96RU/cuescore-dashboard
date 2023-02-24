@@ -11,9 +11,6 @@ export class MatchComponent implements OnInit {
   @Input()
   match: Match | undefined;
 
-  @Input()
-  tableFullScreen: boolean = false;
-
   constructor() { }
 
   ngOnInit(): void {
