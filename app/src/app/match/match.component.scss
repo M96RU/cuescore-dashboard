@@ -37,6 +37,18 @@
   font-size: smaller;
 }
 
+.match-container-title-fullscreen {
+  float: left;
+  width: 20%;
+  font-size: larger;
+}
+
+.match-container-status-fullscreen {
+  float: right;
+  width: 20%;
+  font-size: larger;
+}
+
 .match-container-content {
   display: flex;
   flex-direction: row;
@@ -46,12 +58,15 @@
   padding: 4px;
   width: 45%;
 }
+
 .match-player-a {
   text-align: right;
 }
+
 .match-player-b {
   text-align: left;
 }
+
 .match-score {
   padding: 4px;
   width: 5%;

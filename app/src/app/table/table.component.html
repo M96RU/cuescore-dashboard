@@ -1,5 +1,7 @@
 <mat-card>
   <mat-card-title>
+    <span [hidden]="displayFullScreenValue"><mat-icon (click)="emitDisplayFullScreenEvent(true)">fullscreen</mat-icon></span>
+    <span [hidden]="!displayFullScreenValue"><mat-icon (click)="emitDisplayFullScreenEvent(false)">maximize</mat-icon></span>
     Matches in progress
   </mat-card-title>
   <mat-card-content>
@@ -15,7 +17,7 @@
           <mat-icon color="warn">warning</mat-icon>
           More than one match launched on table {{table.key}}
         </div>
-        <app-match [match]="match" *ngFor="let match of table.value"></app-match>
+        <app-match [match]="match" [tableFullScreen]="displayFullScreenValue" *ngFor="let match of table.value"></app-match>
       </div>
     </div>
   </mat-card-content>

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {Match} from 'src/app/model/match';
 
@@ -11,6 +11,11 @@ export class TableComponent implements OnInit, OnChanges {
 
   @Input()
   data: IntegrationData | undefined;
+
+  @Output()
+  displayFullScreen = new EventEmitter<boolean>();
+
+  displayFullScreenValue: boolean = false;
 
   tables: Map<number, Match[]> = new Map();
 
@@ -74,4 +79,8 @@ export class TableComponent implements OnInit, OnChanges {
     this.tables = playingMatchesTables;
   }
 
+  emitDisplayFullScreenEvent(value: boolean): void {
+    this.displayFullScreenValue = value;
+    this.displayFullScreen.emit(value);
+  }
 }

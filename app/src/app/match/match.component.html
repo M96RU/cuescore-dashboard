@@ -1,8 +1,8 @@
 <div *ngIf="match" class="match-container">
-  <div class="match-container-title">
+  <div class="match-container-title" [class.match-container-title-fullscreen]="tableFullScreen">
     {{match.tournament}} - {{match.round}} - {{match.order}}
   </div>
-  <div class="match-container-status">
+  <div class="match-container-status" [class.match-container-status-fullscreen]="tableFullScreen">
     <span [hidden]="match.status !== 'finished'">Finished since {{match.finishedTime | date:'HH\'h\'mm'}}</span>
     <span [hidden]="match.status !== 'playing'">In progress since {{match.startTime | date:'HH\'h\'mm'}}</span>
     <span [hidden]="match.status !== 'waiting'">Waiting <span *ngIf="match.startTime"> - launched at {{match.startTime | date:'HH\'h\'mm'}}</span></span>
