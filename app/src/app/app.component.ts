@@ -12,8 +12,6 @@ export class AppComponent implements OnDestroy {
 
   private readonly integrationSubscription: Subscription;
 
-  tableFullscreen: boolean = false;
-
   integrationData: BehaviorSubject<IntegrationData> = new BehaviorSubject<IntegrationData>(new IntegrationData());
 
   constructor(
@@ -40,9 +38,5 @@ export class AppComponent implements OnDestroy {
       this.integrationData.next(update);
     });
 
-  }
-
-  tableComponentFullScreen(display: boolean) {
-    this.tableFullscreen = display;
   }
 }
