@@ -148,8 +148,9 @@ export class IntegrationService {
                 const playingMatches = playerA.matches.filter(match => match.status != 'finished');
                 match.playerAduplicated = playingMatches.length > 1;
 
-                if (playingMatches.length > 0) {
-                  const first = playingMatches[0];
+                const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
+                if (playingMatchesWithTable.length > 0) {
+                  const first = playingMatchesWithTable[0];
                   match.playerAtable = first.tableNum;
                 }
               }
@@ -160,8 +161,9 @@ export class IntegrationService {
                 const playingMatches = playerB.matches.filter(match => match.status != 'finished');
                 match.playerBduplicated = playingMatches.length > 1;
 
-                if (playingMatches.length > 0) {
-                  const first = playingMatches[0];
+                const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
+                if (playingMatchesWithTable.length > 0) {
+                  const first = playingMatchesWithTable[0];
                   match.playerBtable = first.tableNum;
                 }
               }
