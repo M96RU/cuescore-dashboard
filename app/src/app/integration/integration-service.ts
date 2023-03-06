@@ -7,6 +7,7 @@ import {Match} from 'src/app/model/match';
 import {Player} from 'src/app/model/player';
 import {Table} from 'src/app/model/table';
 import {Tournament} from 'src/app/model/tournament';
+import {SettingsService} from 'src/app/settings/settings.service';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
 @Injectable()
@@ -14,7 +15,8 @@ export class IntegrationService {
 
   constructor(
     private httpClient: HttpClient,
-    private tournamentService: TournamentService
+    private tournamentService: TournamentService,
+    private settingsService: SettingsService
   ) {
   }
 
@@ -53,7 +55,7 @@ export class IntegrationService {
 
   retrieveIntegrationData(): Observable<IntegrationData> {
 
-    const tournaments = this.tournamentService.getTournaments();
+    const tournaments = this.settingsService.getTournaments();
 
     if (tournaments.length == 0) {
       return of(new IntegrationData());

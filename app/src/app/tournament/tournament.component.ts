@@ -1,9 +1,10 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {Tournament} from 'src/app/model/tournament';
+import {SettingsService} from 'src/app/settings/settings.service';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class TournamentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private tournamentService: TournamentService
+    private tournamentService: TournamentService,
+    private settingsService: SettingsService
   ) {
   }
 
@@ -37,7 +39,7 @@ export class TournamentComponent implements OnInit {
     this.tournamentService.getCuescoreTournament(value).subscribe({
       next: response => {
         if (response.tournamentId) {
-          this.tournamentService.addTournamentId(response.tournamentId);
+          this.settingsService.addTournamentId(response.tournamentId);
           this.launchIntegration.emit(true);
         }
       },
@@ -50,7 +52,7 @@ export class TournamentComponent implements OnInit {
   }
 
   remove(tournament: Tournament) {
-    this.tournamentService.removeTournamentId(tournament.id);
+    this.settingsService.removeTournamentId(tournament.id);
     this.launchIntegration.emit(true);
   }
 

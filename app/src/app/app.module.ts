@@ -11,6 +11,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntegrationService} from 'src/app/integration/integration-service';
+import {SettingsService} from 'src/app/settings/settings.service';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -54,7 +55,8 @@ import {TournamentComponent} from './tournament/tournament.component';
   ],
   providers: [
     IntegrationService,
-    TournamentService
+    TournamentService,
+    SettingsService
   ],
   bootstrap: [AppComponent]
 })
