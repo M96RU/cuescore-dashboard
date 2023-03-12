@@ -1,21 +1,21 @@
-<mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')" *ngIf="true">
-  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <p>
-      <button mat-button (click)="close('toggle button')">Toggle</button>
-    </p>
-    liste des buttons
-  </mat-sidenav>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer class="menu-opened" mode="over">
+    <button mat-button (click)="drawer.close()">Fermer</button>
+    <div *ngFor="let tournament of integrationData.value.tournaments" (click)="selectTournament(tournament);">
+      {{tournament.name}}
+    </div>
+  </mat-drawer>
 
-  <mat-sidenav-content>
-    <p>
-      <button mat-button (click)="sidenav.open()">Open</button>
-    </p>
-    <p>Closed due to: {{reason}}</p>
-  </mat-sidenav-content>
+  <div class="menu-closed" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </div>
+  <div class="content">
+    <app-table [data]="integrationData.value"></app-table>
+    <app-matches [data]="integrationData.value" [tournament]="tournament"></app-matches>
+    <!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
+  </div>
 
-</mat-sidenav-container>
-
-okok
+</mat-drawer-container>
 
 <mat-toolbar color="primary">
   <div class="refresh-container" (click)="updateData()">
@@ -26,10 +26,5 @@ okok
   <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
 </mat-toolbar>
 
-<div class="content">
-  <app-table [data]="integrationData.value"></app-table>
-  <app-matches [data]="integrationData.value"></app-matches>
-  <!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
-</div>
 
 <router-outlet></router-outlet>

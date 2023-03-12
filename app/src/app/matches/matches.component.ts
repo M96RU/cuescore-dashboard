@@ -12,6 +12,10 @@ export class MatchesComponent implements OnInit {
   @Input()
   data: IntegrationData | undefined;
 
+
+  @Input()
+  tournament: Tournament | undefined;
+
   selectedTournament: Tournament | undefined;
 
   constructor() { }

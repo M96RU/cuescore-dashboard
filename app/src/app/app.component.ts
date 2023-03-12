@@ -1,8 +1,8 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
+import {Component, OnDestroy} from '@angular/core';
 import {BehaviorSubject, interval, Subscription} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {IntegrationService} from 'src/app/integration/integration-service';
+import {Tournament} from 'src/app/model/tournament';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +11,7 @@ import {IntegrationService} from 'src/app/integration/integration-service';
 })
 export class AppComponent implements OnDestroy {
 
-  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
-
-  reason = '';
+  tournament: Tournament | undefined;
 
   private readonly integrationSubscription: Subscription;
 
@@ -32,11 +30,6 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  close(reason: string) {
-    this.reason = reason;
-    this.sidenav?.close();
-  }
-
   ngOnDestroy(): void {
     if (this.integrationSubscription) {
       this.integrationSubscription.unsubscribe()
@@ -48,5 +41,9 @@ export class AppComponent implements OnDestroy {
       this.integrationData.next(update);
     });
 
+  }
+
+  selectTournament(tournament: Tournament): void {
+    this.tournament = tournament;
   }
 }

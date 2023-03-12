@@ -1,3 +1,13 @@
+
+.menu-opened {
+  padding: 20px;
+}
+
+.menu-closed {
+  position: absolute;
+  z-index: 1996;
+}
+
 .content {
   display: flex;
   flex-direction: row;
