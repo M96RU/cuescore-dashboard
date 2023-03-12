@@ -11,6 +11,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntegrationService} from 'src/app/integration/integration-service';
+import {MatchesComponent} from 'src/app/matches/matches.component';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -27,7 +28,8 @@ import { PlayerComponent } from './player/player.component';
     TableComponent,
     MatchComponent,
     ScheduleComponent,
-    PlayerComponent
+    PlayerComponent,
+    MatchesComponent
   ],
   imports: [
     /**
