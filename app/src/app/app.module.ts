@@ -18,6 +18,7 @@ import {MatchComponent} from './match/match.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {TournamentComponent} from './tournament/tournament.component';
     TournamentComponent,
     TableComponent,
     MatchComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    PlayerComponent
   ],
   imports: [
     /**

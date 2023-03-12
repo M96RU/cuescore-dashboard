@@ -1,3 +1,5 @@
+import {Player} from 'src/app/model/player';
+
 export class Match {
   id: string = '';
   status: string | undefined;
@@ -5,12 +7,15 @@ export class Match {
   round: string | undefined;
   order: string | undefined;
   tableNum: number | undefined;
+  raceTo: number | undefined;
   playerAid: string | undefined;
+  playerA: Player | undefined;
   playerAname: string | undefined;
   playerAduplicated: boolean = false;
   playerAtable: number | undefined;
   playerAscore: number = 0;
   playerBid: string | undefined;
+  playerB: Player | undefined;
   playerBname: string | undefined;
   playerBscore: number = 0;
   playerBduplicated: boolean = false;
