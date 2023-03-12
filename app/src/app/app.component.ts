@@ -1,4 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {MatSidenav} from '@angular/material/sidenav';
 import {BehaviorSubject, interval, Subscription} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {IntegrationService} from 'src/app/integration/integration-service';
@@ -9,6 +10,10 @@ import {IntegrationService} from 'src/app/integration/integration-service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
+
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
+
+  reason = '';
 
   private readonly integrationSubscription: Subscription;
 
@@ -25,6 +30,11 @@ export class AppComponent implements OnDestroy {
     this.integrationSubscription = interval(60000).subscribe(() => {
       this.updateData();
     });
+  }
+
+  close(reason: string) {
+    this.reason = reason;
+    this.sidenav?.close();
   }
 
   ngOnDestroy(): void {

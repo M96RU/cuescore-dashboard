@@ -1,12 +1,13 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,6 +20,7 @@ import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
 import { PlayerComponent } from './player/player.component';
+import { MatchesComponent } from './matches/matches.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PlayerComponent } from './player/player.component';
     TableComponent,
     MatchComponent,
     ScheduleComponent,
-    PlayerComponent
+    PlayerComponent,
+    MatchesComponent
   ],
   imports: [
     /**
@@ -52,7 +55,9 @@ import { PlayerComponent } from './player/player.component';
     MatIconModule,
     MatToolbarModule,
     MatChipsModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    MatSidenavModule
   ],
   providers: [
     IntegrationService,

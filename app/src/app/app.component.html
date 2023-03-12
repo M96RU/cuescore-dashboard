@@ -1,3 +1,22 @@
+<mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')" *ngIf="true">
+  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
+    <p>
+      <button mat-button (click)="close('toggle button')">Toggle</button>
+    </p>
+    liste des buttons
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p>
+      <button mat-button (click)="sidenav.open()">Open</button>
+    </p>
+    <p>Closed due to: {{reason}}</p>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+okok
+
 <mat-toolbar color="primary">
   <div class="refresh-container" (click)="updateData()">
     Last update : {{integrationData.value.date | date:'HH\'h\'mm' }}
@@ -9,7 +28,8 @@
 
 <div class="content">
   <app-table [data]="integrationData.value"></app-table>
-<!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
+  <app-matches [data]="integrationData.value"></app-matches>
+  <!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
 </div>
 
 <router-outlet></router-outlet>
