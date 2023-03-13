@@ -3,6 +3,7 @@ import {Player} from 'src/app/model/player';
 export class Match {
   id: string = '';
   status: string | undefined;
+  tournamentId: string | undefined;
   tournament: string | undefined;
   round: string | undefined;
   order: string | undefined;

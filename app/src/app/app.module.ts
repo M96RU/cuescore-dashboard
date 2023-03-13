@@ -7,6 +7,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -54,7 +55,8 @@ import { PlayerComponent } from './player/player.component';
     MatIconModule,
     MatToolbarModule,
     MatChipsModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   providers: [
     IntegrationService,

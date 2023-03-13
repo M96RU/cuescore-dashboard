@@ -1,3 +1,63 @@
+<mat-card>
+  <mat-card-title>
+    {{tournament?.name}}
+  </mat-card-title>
+  <mat-card-content>
 
+    <table mat-table [dataSource]="matches" class="mat-elevation-z8">
 
-matches {{tournament?.name}} !
+      <ng-container matColumnDef="order">
+        <td class="match-order" mat-cell *matCellDef="let match">{{match.order}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="round">
+        <td mat-cell *matCellDef="let match">{{match.round}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerA">
+        <td mat-cell *matCellDef="let match">
+          <app-player [hidden]="!match.playerA" [player]="match.playerA"></app-player>
+          <span [hidden]="match.playerA">{{match.playerAname}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerAscore">
+        <td mat-cell *matCellDef="let match"> {{match.playerAscore}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="raceTo">
+        <td mat-cell *matCellDef="let match">({{match.raceTo}})</td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerBscore">
+        <td mat-cell *matCellDef="let match"> {{match.playerBscore}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerB">
+        <td mat-cell *matCellDef="let match">
+          <app-player [hidden]="!match.playerB" [player]="match.playerB"></app-player>
+          <span [hidden]="match.playerB">{{match.playerBname}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="start">
+        <td mat-cell *matCellDef="let match">
+          <span *ngIf="match.startTime">{{match.startTime | date:'HH\'h\'mm'}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="table">
+        <td mat-cell *matCellDef="let match">
+          <span *ngIf="match.status != 'finished' && match.tableNum">T.{{match.tableNum}}</span>
+          <span *ngIf="match.status == 'finished'">{{match.finishedTime | date:'HH\'h\'mm'}}</span>
+        </td>
+      </ng-container>
+
+      <tr class="match-status-{{match.status}}"
+        [class.match-in-progress]="match.playerBscore>0"
+        mat-row *matRowDef="let match; columns: displayedColumns;"></tr>
+
+    </table>
+
+  </mat-card-content>
+</mat-card>

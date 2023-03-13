@@ -11,6 +11,11 @@ export class MatchComponent implements OnInit {
   @Input()
   match: Match | undefined;
 
+
+
+  @Input()
+  details: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

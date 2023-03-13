@@ -81,6 +81,7 @@ export class IntegrationService {
                 match.playerAscore = cuescoreMatch.scoreA;
                 match.playerBscore = cuescoreMatch.scoreB;
                 match.status = cuescoreMatch.matchstatus;
+                match.tournamentId = tournament.id;
                 match.tournament = tournament.name; // to remove
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
