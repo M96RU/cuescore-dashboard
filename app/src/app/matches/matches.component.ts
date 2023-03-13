@@ -12,18 +12,12 @@ export class MatchesComponent implements OnInit {
   @Input()
   data: IntegrationData | undefined;
 
-  selectedTournament: Tournament | undefined;
+  @Input()
+  tournament: Tournament | undefined;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  updateTournament($event: any) {
-    console.log('event:', $event);
-  }
-
-  selectTournament(tournament: Tournament) {
-    this.selectedTournament = tournament;
-  }
 }
