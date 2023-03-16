@@ -17,7 +17,7 @@
 
       <ng-container matColumnDef="playerA">
         <td mat-cell *matCellDef="let match">
-          <app-player [hidden]="!match.playerA" [player]="match.playerA"></app-player>
+          <app-player [hidden]="!match.playerA" [player]="match.playerA" [matchContext]="match"></app-player>
           <span [hidden]="match.playerA">{{match.playerAname}}</span>
         </td>
       </ng-container>
@@ -36,7 +36,7 @@
 
       <ng-container matColumnDef="playerB">
         <td mat-cell *matCellDef="let match">
-          <app-player [hidden]="!match.playerB" [player]="match.playerB"></app-player>
+          <app-player [hidden]="!match.playerB" [player]="match.playerB" [matchContext]="match"></app-player>
           <span [hidden]="match.playerB">{{match.playerBname}}</span>
         </td>
       </ng-container>
@@ -57,7 +57,7 @@
       <ng-container matColumnDef="minutes">
         <td mat-cell *matCellDef="let match">
           <span *ngIf="match.minutes" [class.warning]="match.minutes && match.minutes > 10*(match.raceTo*2-1)">
-            <mat-icon *ngIf="match.minutes > 7*(match.raceTo*2-1)">warning</mat-icon>{{match.minutes}}'
+            <mat-icon *ngIf="match.minutes > 7*(match.raceTo*2-1)">timer</mat-icon>{{match.minutes}}'
           </span>
         </td>
       </ng-container>

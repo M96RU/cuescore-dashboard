@@ -10,6 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntegrationService} from 'src/app/integration/integration-service';
@@ -59,7 +60,8 @@ import { PlayerComponent } from './player/player.component';
     MatCardModule,
     MatTableModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [
     IntegrationService,

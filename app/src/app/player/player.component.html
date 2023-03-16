@@ -1,1 +1,9 @@
-{{player?.name}}
+<div *ngIf="player"
+     [class.player-a]="player && player.id == matchContext?.playerA?.id"
+     [class.player-b]="player && player.id == matchContext?.playerB?.id"
+>
+  <span>{{player.name}}</span>
+  <span><mat-icon *ngIf="duplicate" matTooltip="Doublons">filter_2</mat-icon></span>
+  <span><mat-icon *ngIf="inProgressWarning" color="warn" [matTooltip]="inProgressWarning">sync_problem</mat-icon></span>
+  <span><mat-icon *ngIf="alreadyPlayingOnTableWarning" [color]="inProgressWarning ? 'warn' : undefined" [matTooltip]="alreadyPlayingOnTableWarning">block</mat-icon></span>
+</div>
