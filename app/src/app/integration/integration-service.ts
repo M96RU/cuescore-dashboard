@@ -9,6 +9,8 @@ import {Table} from 'src/app/model/table';
 import {Tournament} from 'src/app/model/tournament';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
+const WALK_OVER_PLAYER = '1000615';
+
 @Injectable()
 export class IntegrationService {
 
@@ -30,7 +32,7 @@ export class IntegrationService {
   }
 
   parsePlayer(cuescore: any): Player | null {
-    if (cuescore && cuescore.playerId > 0 && cuescore.playerId != '1000615') {
+    if (cuescore && cuescore.playerId > 0 && cuescore.playerId != WALK_OVER_PLAYER) {
       const player = new Player();
       player.id = cuescore.playerId;
       player.name = cuescore.name;
@@ -86,9 +88,17 @@ export class IntegrationService {
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
                 match.startTime = this.parseDateTime(cuescoreMatch.starttime);
-                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime)
+                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime);
+
+                if (match.startTime) {
+                  const dateToCompare = match.finishedTime || new Date();
+                  const millis = dateToCompare.getTime() - match.startTime.getTime()
+                  match.minutes = Math.round(millis / 60000);
+                }
 
                 // Players
+                match.blank = cuescoreMatch.playerA?.playerId == WALK_OVER_PLAYER || cuescoreMatch.playerB?.playerId == WALK_OVER_PLAYER;
+
                 const playerA = this.parsePlayer(cuescoreMatch.playerA);
                 if (playerA) {
                   match.playerAid = playerA.id;

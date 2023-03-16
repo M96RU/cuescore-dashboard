@@ -1,8 +1,9 @@
 <mat-card>
   <mat-card-title>
-    {{tournament?.name}}
+    <span>{{tournament?.name}}</span>
   </mat-card-title>
   <mat-card-content>
+    <span><mat-slide-toggle (change)="refreshMatches()" color="primary" [(ngModel)]="displayBlanks">Walk Over</mat-slide-toggle></span>
 
     <table mat-table [dataSource]="matches" class="mat-elevation-z8">
 
@@ -50,6 +51,14 @@
         <td mat-cell *matCellDef="let match">
           <span *ngIf="match.status != 'finished' && match.tableNum">T.{{match.tableNum}}</span>
           <span *ngIf="match.status == 'finished'">{{match.finishedTime | date:'HH\'h\'mm'}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="minutes">
+        <td mat-cell *matCellDef="let match">
+          <span *ngIf="match.minutes" [class.warning]="match.minutes && match.minutes > 10*(match.raceTo*2-1)">
+            <mat-icon *ngIf="match.minutes > 7*(match.raceTo*2-1)">warning</mat-icon>{{match.minutes}}'
+          </span>
         </td>
       </ng-container>
 

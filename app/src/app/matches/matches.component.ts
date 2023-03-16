@@ -10,6 +10,8 @@ import {Tournament} from 'src/app/model/tournament';
 })
 export class MatchesComponent implements OnInit, OnChanges {
 
+  displayBlanks = false;
+
   @Input()
   data: IntegrationData | undefined;
 
@@ -20,19 +22,29 @@ export class MatchesComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  displayedColumns: string[] = ['order', 'round', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'table'];
+  displayedColumns: string[] = ['order', 'round', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'table', 'minutes'];
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.refreshMatches();
+  }
+
+  refreshMatches() {
     if (this.data) {
+      let matches: Match[];
       if (this.tournament) {
-        this.matches = this.data.matches.filter(match => match.tournamentId === this.tournament?.id);
+        matches = this.data.matches.filter(match => match.tournamentId === this.tournament?.id);
       } else {
-        this.matches = this.data.matches;
+        matches = this.data.matches;
+      }
+
+      if (this.displayBlanks) {
+        this.matches = matches;
+      } else {
+        this.matches = matches.filter(match => !match.blank);
       }
     }
   }
-
 }

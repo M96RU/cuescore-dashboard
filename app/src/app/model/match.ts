@@ -3,6 +3,7 @@ import {Player} from 'src/app/model/player';
 export class Match {
   id: string = '';
   status: string | undefined;
+  blank: boolean = false;
   tournamentId: string | undefined;
   tournament: string | undefined;
   round: string | undefined;
@@ -23,4 +24,5 @@ export class Match {
   playerBtable: number | undefined;
   startTime: Date | undefined;
   finishedTime: Date | undefined;
+  minutes: number | undefined; // duration
 }
