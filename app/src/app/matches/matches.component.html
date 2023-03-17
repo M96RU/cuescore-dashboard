@@ -1,6 +1,10 @@
 <mat-card>
   <mat-card-content>
-    <span [hidden]="tournament == undefined"><mat-slide-toggle (change)="refreshMatches()" color="primary" [(ngModel)]="displayBlanks">Walk Over</mat-slide-toggle></span>
+    <span [hidden]="tournament == undefined">
+      <mat-slide-toggle (change)="refreshMatches()" color="primary" [(ngModel)]="displayBlanks">Walk Over</mat-slide-toggle>
+      <mat-slide-toggle (change)="refreshMatches()" color="primary" [(ngModel)]="displayReady">Ready to launch</mat-slide-toggle>
+
+    </span>
 
     <table mat-table [dataSource]="matches" class="mat-elevation-z8">
 

@@ -187,10 +187,26 @@ export class IntegrationService {
           });
 
           integrationData.tables = Array.from(tables.values());
-          integrationData.players = Array.from(players.values());
+          integrationData.players = this.computePlayersData(Array.from(players.values()));
           return integrationData;
         }
       )
     )
+  }
+
+  computePlayersData(players: Player[]): Player[] {
+    const computePlayers: Player[] = [];
+
+    players.forEach(player => {
+      const playingMatches = player.matches.filter(match => match.status != 'finished');
+      player.duplicate = playingMatches.length > 1;
+      player.inProgress = playingMatches.filter(match => match.tableNum);
+      if (player.inProgress.length > 1) {
+        const tables = player.inProgress.map(match => match.tableNum).sort((t1, t2) => (t1 || 0) - (t2 || 0)).join(' - ');
+        player.inProgressWarning = player.name + ' sur plusieurs tables: ' + tables;
+      }
+    });
+
+    return computePlayers;
   }
 }

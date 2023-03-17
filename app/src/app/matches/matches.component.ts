@@ -13,6 +13,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   keepFinishedMatchesDuringMillis = 5 * 60 * 1000; // 5 minutes x 60 seconds x 1000 millis
 
   displayBlanks = false;
+  displayReady = false;
 
   @Input()
   data: IntegrationData | undefined;
@@ -104,11 +105,29 @@ export class MatchesComponent implements OnInit, OnChanges {
   private filterMatches(matches: Match[], tournament: Tournament): Match[] {
     let tournamentMatches = matches.filter(match => match.tournamentId === tournament.id);
 
-    if (this.displayBlanks) {
-      return tournamentMatches;
-    } else {
-      return tournamentMatches.filter(match => !match.blank);
-    }
+    return tournamentMatches.filter(match => {
+
+      // Hide blanks
+      if (!this.displayBlanks && match.blank) {
+        return false;
+      }
+
+      // Hide matches not ready to be launched
+      if (this.displayReady) {
+        if (match.status == 'finished' || !match.playerA || !match.playerB) {
+          return false;
+        }
+        const matchesInProgressA = match.playerA?.inProgress.filter(m => m.id != match.id).length || 0
+        if (matchesInProgressA > 0) {
+          return false;
+        }
+        const matchesInProgressB = match.playerB?.inProgress.filter(m => m.id != match.id).length || 0
+        if (matchesInProgressB > 0) {
+          return false;
+        }
+      }
+      return true;
+    });
 
   }
 }
