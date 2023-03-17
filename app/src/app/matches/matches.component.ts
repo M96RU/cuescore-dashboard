@@ -10,6 +10,8 @@ import {Tournament} from 'src/app/model/tournament';
 })
 export class MatchesComponent implements OnInit, OnChanges {
 
+  keepFinishedMatchesDuringMillis = 5 * 60 * 1000; // 5 minutes x 60 seconds x 1000 millis
+
   displayBlanks = false;
 
   @Input()
@@ -20,9 +22,10 @@ export class MatchesComponent implements OnInit, OnChanges {
 
   matches: Match[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
-  displayedColumns: string[] = ['order', 'round', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'table', 'minutes'];
+  displayedColumns: string[] = ['table', 'tournament', 'order', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
 
   ngOnInit(): void {
   }
@@ -33,18 +36,79 @@ export class MatchesComponent implements OnInit, OnChanges {
 
   refreshMatches() {
     if (this.data) {
-      let matches: Match[];
-      if (this.tournament) {
-        matches = this.data.matches.filter(match => match.tournamentId === this.tournament?.id);
+      if (!this.tournament) {
+        this.matches = this.computeLiveMatches(this.data.matches);
       } else {
-        matches = this.data.matches;
-      }
-
-      if (this.displayBlanks) {
-        this.matches = matches;
-      } else {
-        this.matches = matches.filter(match => !match.blank);
+        this.matches = this.filterMatches(this.data.matches, this.tournament)
       }
     }
+  }
+
+  computeLiveMatches(matches: Match[]) : Match[] {
+
+    const nbTables = Math.max(...matches.map(match => match.tableNum || 0));
+
+    const liveMatches: Match[] = [];
+
+    for (let tableNum=1; tableNum<=nbTables; tableNum++) {
+      const tableMatches = matches.filter(match => match.tableNum == tableNum);
+      const tableMatchesInProgress = tableMatches.filter(match => match.status != 'finished');
+      if (tableMatchesInProgress.length>1) {
+        tableMatchesInProgress.forEach(match => {
+          match.tableNumWarning = tableMatchesInProgress.length + ' matches on table ' + tableNum;
+          liveMatches.push(match);
+        });
+      }else if (tableMatchesInProgress.length>0) {
+        liveMatches.push(...tableMatchesInProgress);
+      } else {
+
+        // find last finished match
+        let finishedMatchFound = false;
+        const finishedMatches = tableMatches.filter(match => match.status == 'finished');
+
+        if (finishedMatches.length > 0) {
+          const lastFinishedMatches = finishedMatches.sort((first: Match, second: Match) => {
+            if (!first.finishedTime) {
+              return 1;
+            }
+            if (!second.finishedTime) {
+              return -1;
+            }
+            return second.finishedTime.getTime() - first.finishedTime.getTime();
+          });
+          const lastFinishedMatch = lastFinishedMatches[0];
+          if (lastFinishedMatch.finishedTime) {
+            const now = new Date();
+            const finishedSinceMillis = now.getTime() - lastFinishedMatch.finishedTime.getTime();
+            if (finishedSinceMillis < this.keepFinishedMatchesDuringMillis) {
+              finishedMatchFound = true;
+              lastFinishedMatch.tableNumWarning = 'Table ' + tableNum + ' disponible';
+              liveMatches.push(lastFinishedMatch);
+            }
+          }
+        }
+
+        if (!finishedMatchFound) {
+          const emptyTable = new Match();
+          emptyTable.tableNum = tableNum;
+          emptyTable.tableNumWarning = 'Table ' + tableNum + ' disponible';
+          liveMatches.push(emptyTable);
+        }
+      }
+    }
+
+    return liveMatches.sort((m1, m2) => (m1.tableNum || 0) - (m2.tableNum || 0));
+  }
+
+
+  private filterMatches(matches: Match[], tournament: Tournament): Match[] {
+    let tournamentMatches = matches.filter(match => match.tournamentId === tournament.id);
+
+    if (this.displayBlanks) {
+      return tournamentMatches;
+    } else {
+      return tournamentMatches.filter(match => !match.blank);
+    }
+
   }
 }

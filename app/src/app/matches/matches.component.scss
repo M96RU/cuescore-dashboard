@@ -2,14 +2,8 @@ table {
   width: 100%;
 }
 
-td.mat-cell:first-of-type,
-td.mat-cell:last-of-type {
-  padding: 0;
-}
-
-.mat-column-start,
-.mat-column-table {
-
+.mat-column-tournament {
+  text-align: center;
 }
 
 .mat-column-order,

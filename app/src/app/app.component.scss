@@ -1,25 +1,22 @@
-.content {
-  display: flex;
-  flex-direction: row;
-}
-
 .menu-item {
   cursor: pointer;
   font-size: smaller;
   font-weight: lighter;
   background-color: #172266;
   border-radius: 10px;
-  padding: 0 10px 0 10px;
+  padding: 0 20px 0 20px;
   margin: 5px;
+}
+
+.live {
+  background-color: red;
+  font-weight: bold;
 }
 
 app-tournament {
   width: 100%;
 }
-app-table {
-  width: 34%;
-}
 
 app-matches {
-  width: 66%;
+  width: 100%;
 }

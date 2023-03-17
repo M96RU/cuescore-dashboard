@@ -9,6 +9,7 @@ export class Match {
   round: string | undefined;
   order: string | undefined;
   tableNum: number | undefined;
+  tableNumWarning: string | undefined;
   raceTo: number | undefined;
   playerAid: string | undefined;
   playerA: Player | undefined;

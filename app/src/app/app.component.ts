@@ -38,15 +38,15 @@ export class AppComponent implements OnDestroy {
 
   updateData() {
     this.integrationService.retrieveIntegrationData().subscribe(update => {
-      if (!this.tournament && update.tournaments.length>0) {
-        this.selectTournament(update.tournaments[0]);
-      }
+      // if (!this.tournament && update.tournaments.length>0) {
+      //   this.selectTournament(update.tournaments[0]);
+      // }
       this.integrationData.next(update);
     });
 
   }
 
-  selectTournament(tournament: Tournament): void {
+  selectTournament(tournament: Tournament | undefined): void {
     this.tournament = tournament;
   }
 }
