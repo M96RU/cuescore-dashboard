@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+.matches-menu mat-slide-toggle {
+  margin: 0 5px 0 5px;
+}
+
 .available-tables mat-chip {
   margin: 5px;
 }
