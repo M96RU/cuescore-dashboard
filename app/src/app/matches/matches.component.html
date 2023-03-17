@@ -54,6 +54,7 @@
       <ng-container matColumnDef="end">
         <td mat-cell *matCellDef="let match">
           <span *ngIf="match.status == 'finished'">{{match.finishedTime | date:'HH\'h\'mm'}}</span>
+          <span *ngIf="match.tableNum && match.status != 'finished' && !match.tableNumWarning"><mat-icon>nordic_walking</mat-icon></span>
         </td>
       </ng-container>
 
