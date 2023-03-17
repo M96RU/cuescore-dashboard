@@ -14,6 +14,7 @@ export class MatchesComponent implements OnInit, OnChanges {
 
   displayBlanks = false;
   displayReady = false;
+  nbTables: number = 20;
 
   @Input()
   data: IntegrationData | undefined;
@@ -22,6 +23,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   tournament: Tournament | undefined;
 
   matches: Match[] = [];
+  availableTables: number[] | undefined;
 
   constructor() {
   }
@@ -37,29 +39,50 @@ export class MatchesComponent implements OnInit, OnChanges {
 
   refreshMatches() {
     if (this.data) {
+
       if (!this.tournament) {
+        this.availableTables = undefined;
         this.matches = this.computeLiveMatches(this.data.matches);
       } else {
+        this.availableTables = this.getAvailableTables(this.data.matches);
         this.matches = this.filterMatches(this.data.matches, this.tournament)
       }
     }
   }
 
-  computeLiveMatches(matches: Match[]) : Match[] {
+  getAvailableTables(matches: Match[]): number[] | undefined {
+    const availableTables: number[] = [];
+    const maxTable = Math.max(...matches.map(match => match.tableNum || 0));
+    const nbTablesToUse = Math.max(maxTable, this.nbTables);
+    for (let tableNum = 1; tableNum <= nbTablesToUse; tableNum++) {
+      const tableMatches = matches.filter(match => match.tableNum == tableNum);
+      const tableMatchesInProgress = tableMatches.filter(match => match.status != 'finished');
+      if (tableMatchesInProgress.length == 0) {
+        availableTables.push(tableNum);
+      }
+    }
+    if (availableTables.length > 0) {
+      return availableTables;
+    }
+    return undefined;
+  }
 
-    const nbTables = Math.max(...matches.map(match => match.tableNum || 0));
+  computeLiveMatches(matches: Match[]): Match[] {
+
+    const maxTable = Math.max(...matches.map(match => match.tableNum || 0));
+    const nbTablesToUse = Math.max(maxTable, this.nbTables);
 
     const liveMatches: Match[] = [];
 
-    for (let tableNum=1; tableNum<=nbTables; tableNum++) {
+    for (let tableNum = 1; tableNum <= nbTablesToUse; tableNum++) {
       const tableMatches = matches.filter(match => match.tableNum == tableNum);
       const tableMatchesInProgress = tableMatches.filter(match => match.status != 'finished');
-      if (tableMatchesInProgress.length>1) {
+      if (tableMatchesInProgress.length > 1) {
         tableMatchesInProgress.forEach(match => {
           match.tableNumWarning = tableMatchesInProgress.length + ' matches on table ' + tableNum;
           liveMatches.push(match);
         });
-      }else if (tableMatchesInProgress.length>0) {
+      } else if (tableMatchesInProgress.length > 0) {
         liveMatches.push(...tableMatchesInProgress);
       } else {
 

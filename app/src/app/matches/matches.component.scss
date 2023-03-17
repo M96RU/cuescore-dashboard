@@ -2,6 +2,15 @@ table {
   width: 100%;
 }
 
+.available-tables mat-chip {
+  margin: 5px;
+}
+
+.nb-table-selector {
+  width: 55px;
+  float: right;
+}
+
 .mat-column-tournament {
   text-align: center;
 }
@@ -37,6 +46,7 @@ tr:nth-child(2n+1).match-status-playing td {
   background-color: #4074e8;
   color: white;
 }
+
 tr:nth-child(2n).match-status-playing td {
   background-color: #4074e8;
   color: white;
@@ -46,6 +56,7 @@ tr:nth-child(2n+1).match-status-finished td {
   background-color: #172266;
   color: white;
 }
+
 tr:nth-child(2n).match-status-finished td {
   background-color: #1c326f;
   color: white;
@@ -55,6 +66,7 @@ tr:nth-child(2n+1).match-status-waiting td {
   background-color: #dee4f4;
   color: black;
 }
+
 tr:nth-child(2n).match-status-waiting td {
   background-color: #e7ebf6;
   color: black;
