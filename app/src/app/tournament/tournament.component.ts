@@ -19,6 +19,9 @@ export class TournamentComponent implements OnInit {
   @Output()
   launchIntegration = new EventEmitter<boolean>();
 
+  @Output()
+  tournament = new EventEmitter<Tournament>();
+
   @Input()
   data: IntegrationData | undefined;
 
@@ -31,8 +34,12 @@ export class TournamentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  selectTournament(tournament: Tournament): void {
+    this.tournament.emit(tournament);
+  }
+
+  addTournament(inputValue: string): void {
+    const value = (inputValue || '').trim();
 
     this.tournamentService.getCuescoreTournament(value).subscribe({
       next: response => {
@@ -45,8 +52,6 @@ export class TournamentComponent implements OnInit {
         console.error(err);
       }
     });
-
-    event.chipInput!.clear();
   }
 
   remove(tournament: Tournament) {

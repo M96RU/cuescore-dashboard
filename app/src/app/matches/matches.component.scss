@@ -2,12 +2,31 @@ table {
   width: 100%;
 }
 
+.matches-menu .mat-icon {
+  cursor: pointer;
+}
+
+.matches-menu {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
 .matches-menu mat-slide-toggle {
   margin: 0 5px 0 5px;
 }
 
-.available-tables mat-chip {
+.available-tables-item {
   margin: 5px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+  padding-top: 3px;
+  width: 27px;
+  height: 25px;
+  border-radius: 25px;
 }
 
 .nb-table-selector {

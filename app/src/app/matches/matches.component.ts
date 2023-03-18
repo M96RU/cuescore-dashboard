@@ -153,4 +153,16 @@ export class MatchesComponent implements OnInit, OnChanges {
     });
 
   }
+
+  nbTablesMinus(): void {
+    if (this.nbTables>0) {
+      this.nbTables--;
+      this.refreshMatches();
+    }
+  }
+
+  nbTablesPlus(): void {
+    this.nbTables++;
+    this.refreshMatches();
+  }
 }

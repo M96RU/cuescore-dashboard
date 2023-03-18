@@ -18,6 +18,16 @@ body {
   vertical-align: middle;
 }
 
+.menu-item {
+  cursor: pointer;
+  font-size: smaller;
+  font-weight: lighter;
+  background-color: #172266;
+  border-radius: 10px;
+  padding: 0 20px 0 20px;
+  margin: 5px;
+}
+
 mat-card {
   margin: 7px;
 }
