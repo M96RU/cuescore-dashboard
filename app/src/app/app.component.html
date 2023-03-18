@@ -1,15 +1,19 @@
 <mat-toolbar color="primary">
-  <div class="refresh-container" (click)="updateData()">
+  <div class="menu-item" (click)="updateData()">
     Last update : {{integrationData.value.date | date:'HH\'h\'mm' }}
     <mat-icon color="primary">refresh</mat-icon>
     Refresh
   </div>
-  <app-tournament [data]="integrationData.value" (launchIntegration)="updateData()"></app-tournament>
+  <div class="menu-item live" (click)="selectTournament(undefined)">LIVE</div>
+<!--  <div class="menu-item" *ngFor="let tournament of integrationData.value.tournaments" (click)="selectTournament(tournament)">{{tournament.name}}</div>-->
+  <app-tournament [data]="integrationData.value" (tournament)="selectTournament($event)" (launchIntegration)="updateData()"></app-tournament>
+
 </mat-toolbar>
 
 <div class="content">
-  <app-table [class.fullscreen]="tableFullscreen" [data]="integrationData.value" (displayFullScreen)="tableComponentFullScreen($event)"></app-table>
-  <app-schedule [hidden]="tableFullscreen" [data]="integrationData.value"></app-schedule>
+<!--  <app-table [data]="integrationData.value"></app-table>-->
+  <app-matches [data]="integrationData.value" [tournament]="tournament"></app-matches>
+<!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
 </div>
 
 <router-outlet></router-outlet>

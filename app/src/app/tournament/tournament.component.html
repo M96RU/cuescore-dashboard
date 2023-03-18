@@ -1,15 +1,9 @@
-<mat-form-field class="example-chip-list" appearance="fill">
-  <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip *ngFor="let tournament of data?.tournaments" (removed)="remove(tournament)">
-      <span class="tournament-link" (click)="openTournament(tournament)">{{tournament.name}}</span>
-      <button matChipRemove>
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
-    <input placeholder="Add tournament..."
-           [matChipInputFor]="chipList"
-           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-           [matChipInputAddOnBlur]="addOnBlur"
-           (matChipInputTokenEnd)="add($event)">
-  </mat-chip-list>
-</mat-form-field>
+<div class="tournament-container">
+  <div (click)="selectTournament(tournament)" *ngFor="let tournament of data?.tournaments" class="menu-item">{{tournament.name}}
+    <mat-icon (click)="openTournament(tournament); $event.stopPropagation();">open_in_new</mat-icon>
+    <mat-icon (click)="remove(tournament); $event.stopPropagation();">cancel</mat-icon>
+  </div>
+  <input #input matInput placeholder="Identifiant du tournoi" type="text" (keyup.enter)="addTournament(input.value); input.value=''"/>
+  <mat-icon (click)="addTournament(input.value); input.value=''">add_circle</mat-icon>
+
+</div>

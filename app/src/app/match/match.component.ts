@@ -11,8 +11,10 @@ export class MatchComponent implements OnInit {
   @Input()
   match: Match | undefined;
 
+
+
   @Input()
-  tableFullScreen: boolean = false;
+  details: boolean = false;
 
   constructor() { }
 

@@ -1,20 +1,23 @@
 <div *ngIf="match" class="match-container">
-  <div class="match-container-title" [class.match-container-title-fullscreen]="tableFullScreen">
+  <div class="match-container-title" [hidden]="details">
     {{match.tournament}} - {{match.round}} - {{match.order}}
   </div>
-  <div class="match-container-status" [class.match-container-status-fullscreen]="tableFullScreen">
+  <div class="match-container-status" [hidden]="details">
     <span [hidden]="match.status !== 'finished'">Finished since {{match.finishedTime | date:'HH\'h\'mm'}}</span>
     <span [hidden]="match.status !== 'playing'">In progress since {{match.startTime | date:'HH\'h\'mm'}}</span>
     <span [hidden]="match.status !== 'waiting'">Waiting <span *ngIf="match.startTime"> - launched at {{match.startTime | date:'HH\'h\'mm'}}</span></span>
   </div>
   <div class="match-container-content match-status-{{match.status}}">
-    <div class="match-player match-player-a"
-         [class.match-player-duplicated]="match.playerAduplicated"
-         [class.match-player-another-table]="match.playerAtable && match.playerAtable != match.tableNum">{{match.playerAname}}</div>
+<!--    <div class="match-player match-player-a"-->
+<!--         [class.match-player-duplicated]="match.playerAduplicated"-->
+<!--         [class.match-player-another-table]="match.playerAtable && match.playerAtable != match.tableNum">{{match.playerAname}}</div>-->
+    <div class="match-player match-player-a"><app-player [player]="match.playerA" [hidden]="!match.playerA"></app-player><span [hidden]="match.playerA">{{match.playerAname}}</span></div>
     <div class="match-score">{{match.playerAscore}}</div>
+    <div class="match-race-to">({{match.raceTo}})</div>
     <div class="match-score">{{match.playerBscore}}</div>
-    <div class="match-player match-player-b"
-         [class.match-player-duplicated]="match.playerBduplicated"
-         [class.match-player-another-table]="match.playerBtable && match.playerBtable != match.tableNum">{{match.playerBname}}</div>
+<!--    <div class="match-player match-player-b"-->
+<!--         [class.match-player-duplicated]="match.playerBduplicated"-->
+<!--         [class.match-player-another-table]="match.playerBtable && match.playerBtable != match.tableNum">{{match.playerBname}}</div>-->
+    <div class="match-player match-player-b"><app-player [player]="match.playerB" [hidden]="!match.playerB"></app-player><span [hidden]="match.playerB">{{match.playerBname}}</span></div>
   </div>
 </div>

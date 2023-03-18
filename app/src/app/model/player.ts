@@ -5,4 +5,9 @@ export class Player {
   name: string = "";
 
   matches: Match[] = [];
+
+  // Compute from integration data
+  duplicate = false;
+  inProgress: Match[] = [];
+  inProgressWarning: string | undefined;
 }

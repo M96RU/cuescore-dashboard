@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {BehaviorSubject, interval, Subscription} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {IntegrationService} from 'src/app/integration/integration-service';
+import {Tournament} from 'src/app/model/tournament';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,9 @@ export class AppComponent implements OnDestroy {
 
   private readonly integrationSubscription: Subscription;
 
-  tableFullscreen: boolean = false;
-
   integrationData: BehaviorSubject<IntegrationData> = new BehaviorSubject<IntegrationData>(new IntegrationData());
+
+  tournament: Tournament | undefined;
 
   constructor(
     private integrationService: IntegrationService
@@ -37,12 +38,15 @@ export class AppComponent implements OnDestroy {
 
   updateData() {
     this.integrationService.retrieveIntegrationData().subscribe(update => {
+      // if (!this.tournament && update.tournaments.length>0) {
+      //   this.selectTournament(update.tournaments[0]);
+      // }
       this.integrationData.next(update);
     });
 
   }
 
-  tableComponentFullScreen(display: boolean) {
-    this.tableFullscreen = display;
+  selectTournament(tournament: Tournament | undefined): void {
+    this.tournament = tournament;
   }
 }

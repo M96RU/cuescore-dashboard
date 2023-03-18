@@ -1,16 +1,20 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IntegrationService} from 'src/app/integration/integration-service';
+import {MatchesComponent} from 'src/app/matches/matches.component';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -18,6 +22,7 @@ import {MatchComponent} from './match/match.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,9 @@ import {TournamentComponent} from './tournament/tournament.component';
     TournamentComponent,
     TableComponent,
     MatchComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    PlayerComponent,
+    MatchesComponent
   ],
   imports: [
     /**
@@ -50,7 +57,11 @@ import {TournamentComponent} from './tournament/tournament.component';
     MatIconModule,
     MatToolbarModule,
     MatChipsModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [
     IntegrationService,

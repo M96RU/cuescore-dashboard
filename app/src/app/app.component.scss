@@ -1,28 +1,13 @@
-.content {
-  display: flex;
-  flex-direction: row;
-}
 
-.refresh-container {
-  cursor: pointer;
-  font-size: smaller;
-  font-weight: lighter;
-  background-color: #172266;
-  border-radius: 10px;
-  padding: 0 10px 0 10px;
+.live {
+  background-color: red;
+  font-weight: bold;
 }
 
 app-tournament {
   width: 100%;
 }
-app-table {
-  width: 34%;
-}
 
-app-table.fullscreen {
+app-matches {
   width: 100%;
-}
-
-app-schedule {
-  width: 66%;
 }

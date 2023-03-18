@@ -9,6 +9,8 @@ import {Table} from 'src/app/model/table';
 import {Tournament} from 'src/app/model/tournament';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 
+const WALK_OVER_PLAYER = '1000615';
+
 @Injectable()
 export class IntegrationService {
 
@@ -30,7 +32,7 @@ export class IntegrationService {
   }
 
   parsePlayer(cuescore: any): Player | null {
-    if (cuescore && cuescore.playerId > 0 && cuescore.playerId != '1000615') {
+    if (cuescore && cuescore.playerId > 0 && cuescore.playerId != WALK_OVER_PLAYER) {
       const player = new Player();
       player.id = cuescore.playerId;
       player.name = cuescore.name;
@@ -77,20 +79,30 @@ export class IntegrationService {
 
                 const match = new Match();
                 match.id = cuescoreMatch.matchId;
+                match.raceTo = cuescoreMatch.raceTo;
                 match.playerAscore = cuescoreMatch.scoreA;
                 match.playerBscore = cuescoreMatch.scoreB;
                 match.status = cuescoreMatch.matchstatus;
-                match.tournament = tournament.name;
+                match.tournamentId = tournament.id;
+                match.tournament = tournament.name; // to remove
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
                 match.startTime = this.parseDateTime(cuescoreMatch.starttime);
-                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime)
+                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime);
+
+                if (match.startTime) {
+                  const dateToCompare = match.finishedTime || new Date();
+                  const millis = dateToCompare.getTime() - match.startTime.getTime()
+                  match.minutes = Math.round(millis / 60000);
+                }
 
                 // Players
+                match.blank = cuescoreMatch.playerA?.playerId == WALK_OVER_PLAYER || cuescoreMatch.playerB?.playerId == WALK_OVER_PLAYER;
+
                 const playerA = this.parsePlayer(cuescoreMatch.playerA);
                 if (playerA) {
                   match.playerAid = playerA.id;
-                  match.playerAname = playerA.name;
+                  // match.playerAname = playerA.name;
                   if (!players.has(playerA.id)) {
                     // init the player
                     playerA.matches.push(match);
@@ -109,7 +121,7 @@ export class IntegrationService {
                 const playerB = this.parsePlayer(cuescoreMatch.playerB);
                 if (playerB) {
                   match.playerBid = playerB.id;
-                  match.playerBname = playerB.name;
+                  // match.playerBname = playerB.name;
                   if (!players.has(playerB.id)) {
                     // init the player
                     playerB.matches.push(match);
@@ -141,39 +153,60 @@ export class IntegrationService {
           });
 
           // check player duplicated
+
           matches.forEach(match => {
             if (match.playerAid) {
               const playerA = players.get(match.playerAid);
               if (playerA) {
-                const playingMatches = playerA.matches.filter(match => match.status != 'finished');
-                match.playerAduplicated = playingMatches.length > 1;
-
-                if (playingMatches.length > 0) {
-                  const first = playingMatches[0];
-                  match.playerAtable = first.tableNum;
-                }
+                match.playerA = playerA;
+                // const playingMatches = playerA.matches.filter(match => match.status != 'finished');
+                // match.playerAduplicated = playingMatches.length > 1;
+                //
+                // const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
+                // if (playingMatchesWithTable.length > 0) {
+                //   const first = playingMatchesWithTable[0];
+                //   match.playerAtable = first.tableNum;
+                // }
               }
             }
             if (match.playerBid) {
               const playerB = players.get(match.playerBid);
               if (playerB) {
-                const playingMatches = playerB.matches.filter(match => match.status != 'finished');
-                match.playerBduplicated = playingMatches.length > 1;
-
-                if (playingMatches.length > 0) {
-                  const first = playingMatches[0];
-                  match.playerBtable = first.tableNum;
-                }
+                match.playerB = playerB;
+                // const playingMatches = playerB.matches.filter(match => match.status != 'finished');
+                // match.playerBduplicated = playingMatches.length > 1;
+                //
+                // const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
+                // if (playingMatchesWithTable.length > 0) {
+                //   const first = playingMatchesWithTable[0];
+                //   match.playerBtable = first.tableNum;
+                // }
               }
             }
             integrationData.matches.push(match);
           });
 
           integrationData.tables = Array.from(tables.values());
-          integrationData.players = Array.from(players.values());
+          integrationData.players = this.computePlayersData(Array.from(players.values()));
           return integrationData;
         }
       )
     )
+  }
+
+  computePlayersData(players: Player[]): Player[] {
+    const computePlayers: Player[] = [];
+
+    players.forEach(player => {
+      const playingMatches = player.matches.filter(match => match.status != 'finished');
+      player.duplicate = playingMatches.length > 1;
+      player.inProgress = playingMatches.filter(match => match.tableNum);
+      if (player.inProgress.length > 1) {
+        const tables = player.inProgress.map(match => match.tableNum).sort((t1, t2) => (t1 || 0) - (t2 || 0)).join(' - ');
+        player.inProgressWarning = player.name + ' sur plusieurs tables: ' + tables;
+      }
+    });
+
+    return computePlayers;
   }
 }

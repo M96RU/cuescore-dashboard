@@ -1,0 +1,100 @@
+table {
+  width: 100%;
+}
+
+.matches-menu .mat-icon {
+  cursor: pointer;
+}
+
+.matches-menu {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
+.matches-menu mat-slide-toggle {
+  margin: 0 5px 0 5px;
+}
+
+.available-tables-item {
+  margin: 5px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+  padding-top: 3px;
+  width: 27px;
+  height: 25px;
+  border-radius: 25px;
+}
+
+.nb-table-selector {
+  width: 55px;
+  float: right;
+}
+
+.mat-column-tournament {
+  text-align: center;
+}
+
+.mat-column-order,
+.mat-column-playerAscore,
+.mat-column-playerBscore {
+  //width: 30px;
+  text-align: center;
+}
+
+tr:nth-child(n).match-status-playing td.mat-column-order,
+tr:nth-child(n).match-status-finished td.mat-column-order,
+tr:nth-child(n).match-status-waiting td.mat-column-order {
+  background-color: #c5c8d9;
+  color: black;
+  font-weight: bold;
+}
+
+.mat-column-raceTo {
+  //width: 20px;
+  text-align: center;
+  font-size: smaller;
+}
+
+td.mat-column-playerAscore,
+td.mat-column-playerBscore {
+  font-size: larger;
+  font-weight: bold;
+}
+
+tr:nth-child(2n+1).match-status-playing td {
+  background-color: #4074e8;
+  color: white;
+}
+
+tr:nth-child(2n).match-status-playing td {
+  background-color: #4074e8;
+  color: white;
+}
+
+tr:nth-child(2n+1).match-status-finished td {
+  background-color: #172266;
+  color: white;
+}
+
+tr:nth-child(2n).match-status-finished td {
+  background-color: #1c326f;
+  color: white;
+}
+
+tr:nth-child(2n+1).match-status-waiting td {
+  background-color: #dee4f4;
+  color: black;
+}
+
+tr:nth-child(2n).match-status-waiting td {
+  background-color: #e7ebf6;
+  color: black;
+}
+
+span.warning {
+  color: orange;
+}

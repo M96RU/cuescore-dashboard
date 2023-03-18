@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-content>
+    <span [hidden]="tournament == undefined" class="matches-menu">
+      <mat-slide-toggle (change)="refreshMatches()" [(ngModel)]="displayBlanks" color="primary">Walk Over</mat-slide-toggle>
+      <mat-slide-toggle (change)="refreshMatches()" [(ngModel)]="displayReady" color="primary">Ready to launch</mat-slide-toggle>
+
+      <ng-container *ngIf="availableTables">
+        <mat-icon (click)="nbTablesMinus()">remove_circle</mat-icon>
+        <span *ngFor="let tableNum of availableTables" class="available-tables-item" matTooltip="Table {{tableNum}} libre">{{tableNum}}</span>
+        <mat-icon (click)="nbTablesPlus()">add_circle</mat-icon>
+      </ng-container>
+
+    </span>
+
+    <table [dataSource]="matches" class="mat-elevation-z8" mat-table>
+
+      <ng-container matColumnDef="table">
+        <td *matCellDef="let match" mat-cell>
+          <span *ngIf="!match.tableNumWarning && (!tournament || match.status != 'finished' && match.tableNum)">Table {{match.tableNum}}</span>
+          <span *ngIf="match.tableNumWarning" class="warning"><mat-icon>warning</mat-icon>
+            {{match.tableNumWarning}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tournament">
+        <td *matCellDef="let match" mat-cell>{{match.tournament}} - {{match.round}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="order">
+        <td *matCellDef="let match" class="match-order" mat-cell>{{match.order}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerA">
+        <td *matCellDef="let match" mat-cell>
+          <app-player [hidden]="!match.playerA" [matchContext]="match" [player]="match.playerA"></app-player>
+          <span [hidden]="match.playerA">{{match.playerAname}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerAscore">
+        <td *matCellDef="let match" mat-cell> {{match.playerAscore}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="raceTo">
+        <td *matCellDef="let match" mat-cell>({{match.raceTo}})</td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerBscore">
+        <td *matCellDef="let match" mat-cell> {{match.playerBscore}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="playerB">
+        <td *matCellDef="let match" mat-cell>
+          <app-player [hidden]="!match.playerB" [matchContext]="match" [player]="match.playerB"></app-player>
+          <span [hidden]="match.playerB">{{match.playerBname}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="start">
+        <td *matCellDef="let match" mat-cell>
+          <span *ngIf="match.startTime">{{match.startTime | date:'HH\'h\'mm'}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="end">
+        <td *matCellDef="let match" mat-cell>
+          <span *ngIf="match.status == 'finished'">{{match.finishedTime | date:'HH\'h\'mm'}}</span>
+          <span *ngIf="match.tableNum && match.status != 'finished' && !match.tableNumWarning"><mat-icon matTooltip="Match en cours">nordic_walking</mat-icon></span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="minutes">
+        <td *matCellDef="let match" mat-cell>
+          <span *ngIf="match.minutes" [class.warning]="match.minutes && match.minutes > 10*(match.raceTo*2-1)">
+            <mat-icon *ngIf="match.minutes > 7*(match.raceTo*2-1)">timer</mat-icon>
+            {{match.minutes}}'
+          </span>
+        </td>
+      </ng-container>
+
+      <tr *matRowDef="let match; columns: displayedColumns;"
+          [class.match-in-progress]="match.playerBscore>0"
+          class="match-status-{{match.status}}" mat-row></tr>
+
+    </table>
+
+  </mat-card-content>
+</mat-card>
