@@ -11,3 +11,13 @@
 .player-container span {
   margin: 0 5px 0 5px;
 }
+
+.not-ready {
+  color: red;
+}
+
+.not-ready .player-error {
+  color: orange;
+  font-weight: bold;
+  font-size: larger;
+}
