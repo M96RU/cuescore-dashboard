@@ -153,41 +153,25 @@ export class IntegrationService {
           });
 
           // check player duplicated
-
           matches.forEach(match => {
             if (match.playerAid) {
               const playerA = players.get(match.playerAid);
               if (playerA) {
                 match.playerA = playerA;
-                // const playingMatches = playerA.matches.filter(match => match.status != 'finished');
-                // match.playerAduplicated = playingMatches.length > 1;
-                //
-                // const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
-                // if (playingMatchesWithTable.length > 0) {
-                //   const first = playingMatchesWithTable[0];
-                //   match.playerAtable = first.tableNum;
-                // }
               }
             }
             if (match.playerBid) {
               const playerB = players.get(match.playerBid);
               if (playerB) {
                 match.playerB = playerB;
-                // const playingMatches = playerB.matches.filter(match => match.status != 'finished');
-                // match.playerBduplicated = playingMatches.length > 1;
-                //
-                // const playingMatchesWithTable = playingMatches.filter(match => match.tableNum);
-                // if (playingMatchesWithTable.length > 0) {
-                //   const first = playingMatchesWithTable[0];
-                //   match.playerBtable = first.tableNum;
-                // }
               }
             }
             integrationData.matches.push(match);
           });
 
-          integrationData.tables = Array.from(tables.values());
           integrationData.players = this.computePlayersData(Array.from(players.values()));
+          integrationData.tables = Array.from(tables.values());
+
           return integrationData;
         }
       )
@@ -195,6 +179,7 @@ export class IntegrationService {
   }
 
   computePlayersData(players: Player[]): Player[] {
+
     const computePlayers: Player[] = [];
 
     players.forEach(player => {
@@ -205,6 +190,38 @@ export class IntegrationService {
         const tables = player.inProgress.map(match => match.tableNum).sort((t1, t2) => (t1 || 0) - (t2 || 0)).join(' - ');
         player.inProgressWarning = player.name + ' sur plusieurs tables: ' + tables;
       }
+
+
+      player.finishedMatches = player.matches.filter(match => match.status == 'finished').sort((first: Match, second: Match) => {
+        if (!first.finishedTime) {
+          return 1;
+        }
+        if (!second.finishedTime) {
+          return -1;
+        }
+        return second.finishedTime.getTime() - first.finishedTime.getTime();
+      });
+
+      const finishedMatchesWithoutBlanks = player.finishedMatches.filter(match => !match.blank);
+
+      if (player.inProgress.length == 0) {
+        if (finishedMatchesWithoutBlanks.length > 0) {
+          const lastFinishedMatches = finishedMatchesWithoutBlanks[0];
+          if (lastFinishedMatches.finishedTime) {
+            player.pauseSince = lastFinishedMatches.finishedTime;
+
+            const millis = new Date().getTime() - player.pauseSince.getTime()
+            player.pauseMinutes = Math.round(millis / 60000);
+          } else {
+            const playerA = lastFinishedMatches.playerA?.name || lastFinishedMatches.playerAname;
+            const playerB = lastFinishedMatches.playerB?.name || lastFinishedMatches.playerBname;
+            console.warn('Pas de date de fin pour le match terminé:' + lastFinishedMatches.id + 'du tournoi ' + lastFinishedMatches.tournament + ' entre ' + playerA + ' et ' + playerB);
+          }
+        }
+      }
+      player.nbMatchesPlayed = finishedMatchesWithoutBlanks.length;
+
+      computePlayers.push(player);
     });
 
     return computePlayers;

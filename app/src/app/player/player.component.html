@@ -1,9 +1,15 @@
-<div *ngIf="player"
+<div (click)="openPlayerDetail(player)" *ngIf="player"
      [class.player-a]="player && player.id == matchContext?.playerA?.id"
      [class.player-b]="player && player.id == matchContext?.playerB?.id"
+     class="player-container"
 >
   <span>{{player.name}}</span>
-  <span><mat-icon *ngIf="player?.duplicate" matTooltip="Doublons">filter_2</mat-icon></span>
-  <span><mat-icon *ngIf="player?.inProgressWarning" color="warn" [matTooltip]="player?.inProgressWarning || ''">sync_problem</mat-icon></span>
-  <span><mat-icon *ngIf="alreadyPlayingOnTableWarning" [color]="player?.inProgressWarning ? 'warn' : undefined" [matTooltip]="alreadyPlayingOnTableWarning">block</mat-icon></span>
+  <span *ngIf="player?.duplicate"><mat-icon matTooltip="Doublons">filter_2</mat-icon></span>
+  <span *ngIf="player?.inProgressWarning"><mat-icon [matTooltip]="player?.inProgressWarning || ''" color="warn">sync_problem</mat-icon></span>
+  <ng-container *ngIf="matchContext?.status != 'finished'">
+  <span *ngIf="alreadyPlayingOnTableWarning"><mat-icon [color]="player?.inProgressWarning ? 'warn' : undefined" [matTooltip]="alreadyPlayingOnTableWarning">block</mat-icon></span>
+  <span *ngIf="player.pauseMinutes" [class.warning]="player.pauseMinutes && player.pauseMinutes > 60" matTooltip="En pause depuis {{player.pauseSince | date:'HH\'h\'mm'}}"><mat-icon>single_bed</mat-icon>
+    {{player.pauseMinutes}}'</span>
+  <span class="warning" *ngIf="player.inProgress.length==0 && player.nbMatchesPlayed==0" matTooltip="Aucun match joué"><mat-icon>flag</mat-icon></span>
+  </ng-container>
 </div>

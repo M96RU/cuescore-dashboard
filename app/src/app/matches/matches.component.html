@@ -32,7 +32,7 @@
 
       <ng-container matColumnDef="playerA">
         <td *matCellDef="let match" mat-cell>
-          <app-player [hidden]="!match.playerA" [matchContext]="match" [player]="match.playerA"></app-player>
+          <app-player [hidden]="!match.playerA" [matchContext]="match" [player]="match.playerA" [clic]=true></app-player>
           <span [hidden]="match.playerA">{{match.playerAname}}</span>
         </td>
       </ng-container>
@@ -51,7 +51,7 @@
 
       <ng-container matColumnDef="playerB">
         <td *matCellDef="let match" mat-cell>
-          <app-player [hidden]="!match.playerB" [matchContext]="match" [player]="match.playerB"></app-player>
+          <app-player [hidden]="!match.playerB" [matchContext]="match" [player]="match.playerB" [clic]=true></app-player>
           <span [hidden]="match.playerB">{{match.playerBname}}</span>
         </td>
       </ng-container>
