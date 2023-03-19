@@ -74,7 +74,6 @@ export class IntegrationService {
       const scorerUrlCode = SCORER_CODE.get('' + table.tableId);
       if (scorerUrlCode) {
         table.scorerUrl = 'https://cuescore.com/scoreboard/?code=' + scorerUrlCode;
-        console.log(table);
       }
 
       return table;
