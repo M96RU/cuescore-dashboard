@@ -38,10 +38,16 @@ table {
   text-align: center;
 }
 
+.mat-column-playerA {
+  text-align: right;
+}
+.mat-column-playerB {
+  text-align: left;
+}
+
 .mat-column-order,
 .mat-column-playerAscore,
 .mat-column-playerBscore {
-  //width: 30px;
   text-align: center;
 }
 
@@ -54,7 +60,6 @@ tr:nth-child(n).match-status-waiting td.mat-column-order {
 }
 
 .mat-column-raceTo {
-  //width: 20px;
   text-align: center;
   font-size: smaller;
 }
@@ -93,8 +98,4 @@ tr:nth-child(2n+1).match-status-waiting td {
 tr:nth-child(2n).match-status-waiting td {
   background-color: #e7ebf6;
   color: black;
-}
-
-span.warning {
-  color: orange;
 }

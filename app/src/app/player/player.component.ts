@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {Match} from 'src/app/model/match';
 import {Player} from 'src/app/model/player';
+import {PlayerDetailComponent} from 'src/app/player-detail/player-detail.component';
 
 @Component({
   selector: 'app-player',
@@ -10,6 +12,9 @@ import {Player} from 'src/app/model/player';
 export class PlayerComponent implements OnInit {
 
   @Input()
+  clic: boolean = false;
+
+  @Input()
   matchContext: Match | undefined;
 
   @Input()
@@ -17,7 +22,7 @@ export class PlayerComponent implements OnInit {
 
   alreadyPlayingOnTableWarning: string | undefined;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -30,4 +35,12 @@ export class PlayerComponent implements OnInit {
 
   }
 
+  openPlayerDetail(player: Player): void {
+    if (this.clic) {
+      this.dialog.open(PlayerDetailComponent, {
+        data: player,
+        minWidth: '50%'
+      });
+    }
+  }
 }

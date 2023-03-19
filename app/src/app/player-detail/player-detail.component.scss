@@ -1,0 +1,13 @@
+.title {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.player-detail-stats {
+  display: flex;
+  flex-direction: row;
+}
+
+.player-detail-stats mat-divider {
+  margin: 0 15px 0 15px;
+}

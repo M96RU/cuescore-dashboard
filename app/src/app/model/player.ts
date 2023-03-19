@@ -10,4 +10,8 @@ export class Player {
   duplicate = false;
   inProgress: Match[] = [];
   inProgressWarning: string | undefined;
+  finishedMatches: Match[] = [];
+  pauseSince: Date | undefined;
+  pauseMinutes: number | undefined;
+  nbMatchesPlayed: number = 0
 }

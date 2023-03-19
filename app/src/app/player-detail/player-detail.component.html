@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{player.name}}</h2>
+<mat-dialog-content>
+  <div class="player-detail-stats">
+    <ng-container *ngIf="player.pauseSince">
+      <span>Dernier match terminé à <b>{{player.pauseSince | date:'HH\'h\'mm'}}</b></span>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span>En pause depuis <b>{{player.pauseMinutes}} minutes</b></span>
+      <mat-divider [vertical]="true"></mat-divider>
+    </ng-container>
+    <span><b>{{player.nbMatchesPlayed}}</b> matches joués</span>
+  </div>
+
+  <div *ngFor="let match of player.inProgress">
+    <app-match [match]="match"></app-match>
+  </div>
+
+  <div *ngFor="let match of incomingMatches">
+    <app-match [match]="match"></app-match>
+  </div>
+
+  <div *ngFor="let match of player.finishedMatches">
+    <app-match [match]="match"></app-match>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>
+
+
+
+
+
+
+
+
