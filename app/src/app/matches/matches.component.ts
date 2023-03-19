@@ -28,7 +28,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   constructor() {
   }
 
-  displayedColumns: string[] = ['table', 'tournament', 'order', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
+  displayedColumns: string[] = ['table', 'tournament', 'order', 'scorer', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
 
   ngOnInit(): void {
   }
@@ -155,7 +155,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   }
 
   nbTablesMinus(): void {
-    if (this.nbTables>0) {
+    if (this.nbTables > 0) {
       this.nbTables--;
       this.refreshMatches();
     }
@@ -164,5 +164,11 @@ export class MatchesComponent implements OnInit, OnChanges {
   nbTablesPlus(): void {
     this.nbTables++;
     this.refreshMatches();
+  }
+
+  openMatchScorer(match: Match): void {
+    if (match.scorerUrl) {
+      window.open(match.scorerUrl, 'scorer', 'popup');
+    }
   }
 }

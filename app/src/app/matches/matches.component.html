@@ -30,6 +30,10 @@
         <td *matCellDef="let match" class="match-order" mat-cell>{{match.order}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="scorer">
+        <td *matCellDef="let match" mat-cell><mat-icon *ngIf="match.scorerUrl" (click)="openMatchScorer(match);">scoreboard</mat-icon></td>
+      </ng-container>
+
       <ng-container matColumnDef="playerA">
         <td *matCellDef="let match" mat-cell>
           <app-player [hidden]="!match.playerA" [matchContext]="match" [player]="match.playerA" [clic]=true></app-player>
@@ -38,7 +42,7 @@
       </ng-container>
 
       <ng-container matColumnDef="playerAscore">
-        <td *matCellDef="let match" mat-cell> {{match.playerAscore}} </td>
+        <td *matCellDef="let match" mat-cell>{{match.playerAscore}}</td>
       </ng-container>
 
       <ng-container matColumnDef="raceTo">
@@ -46,7 +50,7 @@
       </ng-container>
 
       <ng-container matColumnDef="playerBscore">
-        <td *matCellDef="let match" mat-cell> {{match.playerBscore}} </td>
+        <td *matCellDef="let match" mat-cell>{{match.playerBscore}}</td>
       </ng-container>
 
       <ng-container matColumnDef="playerB">

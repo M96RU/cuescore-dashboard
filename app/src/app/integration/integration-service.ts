@@ -11,6 +11,29 @@ import {TournamentService} from 'src/app/tournament/tournament.service';
 
 const WALK_OVER_PLAYER = '1000615';
 
+const SCORER_CODE = new Map<string, string>([
+  ['12812770','68537fab'], // table 1
+  ['12812773','8041d95e'], // table 2
+  ['12812776','e241b2b7'], // table 3
+  ['12812779','2bf6b7e8'], // table 4
+  ['12812782','68a2b136'], // table 5
+  ['12812785','e41be679'], // table 6
+  ['12812797','de108f97'], // table 7
+  ['12812800','93c9d835'], // table 8
+  ['12812803','48d19094'], // table 9
+  ['12812806','e91a16ed'], // table 10
+  ['12812812','f9df0bac'], // table 11
+  ['12812815','53bb9a74'], // table 12
+  ['12812818','1e42635d'], // table 13
+  ['12812824','a3c6665d'], // table 14
+  ['12812827','68354abc'], // table 15
+  ['12812830','eb66652a'], // table 16
+  ['12812833','7f8283bc'], // table 17
+  ['12812839','aab530ea'], // table 18
+  ['12812842','b0d08428'], // table 19
+  ['12812845','8891f133'] // table 20
+]);
+
 @Injectable()
 export class IntegrationService {
 
@@ -47,6 +70,13 @@ export class IntegrationService {
       const tableNum = parseInt(cuescore.name); // description for name ?
       const table = new Table(tableNum);
       table.tableId = cuescore.tableId;
+
+      const scorerUrlCode = SCORER_CODE.get('' + table.tableId);
+      if (scorerUrlCode) {
+        table.scorerUrl = 'https://cuescore.com/scoreboard/?code=' + scorerUrlCode;
+        console.log(table);
+      }
+
       return table;
     } else {
       return null
@@ -141,6 +171,9 @@ export class IntegrationService {
                 const table = this.parseTable(cuescoreMatch.table)
                 if (table) {
                   match.tableNum = table.num;
+                  if (match.status != 'finished') {
+                    match.scorerUrl = table.scorerUrl;
+                  }
                   if (!tables.has(table.num)) {
                     tables.set(table.num, table);
                   }
@@ -226,4 +259,5 @@ export class IntegrationService {
 
     return computePlayers;
   }
+
 }

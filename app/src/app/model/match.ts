@@ -10,6 +10,7 @@ export class Match {
   order: string | undefined;
   tableNum: number | undefined;
   tableNumWarning: string | undefined;
+  scorerUrl: string | undefined;
   raceTo: number | undefined;
   playerAid: string | undefined;
   playerA: Player | undefined;

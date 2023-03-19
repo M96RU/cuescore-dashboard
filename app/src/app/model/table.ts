@@ -7,4 +7,5 @@ export class Table {
 
   num: number;
   tableId: string | undefined; // cuescore identifier
+  scorerUrl: string | undefined;
 }
