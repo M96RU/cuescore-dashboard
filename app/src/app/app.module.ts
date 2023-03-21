@@ -26,6 +26,8 @@ import {TableComponent} from './table/table.component';
 import {TournamentComponent} from './tournament/tournament.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
+import { TimerComponent } from './timer/timer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component';
     ScheduleComponent,
     PlayerComponent,
     MatchesComponent,
-    PlayerDetailComponent
+    PlayerDetailComponent,
+    TimerComponent,
+    HomeComponent
   ],
     imports: [
         /**
