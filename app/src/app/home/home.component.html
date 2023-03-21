@@ -8,6 +8,8 @@
   <!--  <div class="menu-item" *ngFor="let tournament of integrationData.value.tournaments" (click)="selectTournament(tournament)">{{tournament.name}}</div>-->
   <app-tournament [data]="integrationData.value" (tournament)="selectTournament($event)" (launchIntegration)="updateData()"></app-tournament>
 
+  <div class="menu-item" routerLink="timer">TIMER</div>
+
 </mat-toolbar>
 
 <div class="content">
