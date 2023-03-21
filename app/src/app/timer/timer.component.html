@@ -1,1 +1,21 @@
-<p>timer works!</p>
+<mat-grid-list cols="2" rowHeight="10:1">
+  <mat-grid-tile class="time" [class.warning]="time<20" colspan="2" rowspan="5">
+    <div [hidden]="time == 0">{{time}}</div>
+    <div [hidden]="time > 0">FAUTE</div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="start()" [disabled]="alreadyBreak" color="primary" mat-raised-button>Casse</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="next()" [disabled]="!before || !alreadyBreak" color="primary" mat-raised-button>Suivant</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="extensionA()" [disabled]="!before || alreadyExtA" color="warn" mat-raised-button>Ext A</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="extensionB()" [disabled]="!before || alreadyExtB" color="warn" mat-raised-button>Ext B</button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <button (click)="restart()" [disabled]="!before" color="accent" mat-raised-button>Nouvelle Partie</button>
+  </mat-grid-tile>
+</mat-grid-list>
