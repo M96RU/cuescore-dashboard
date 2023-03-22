@@ -15,6 +15,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   time: number = 90;
 
   alreadyBreak = false;
+  alreadyPlayed = false;
   alreadyExtA = false;
   alreadyExtB = false;
 
@@ -39,6 +40,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.timerStop();
 
     this.alreadyBreak = false;
+    this.alreadyPlayed = false;
     this.alreadyExtA = false;
     this.alreadyExtB = false;
     this.before = undefined;
@@ -75,7 +77,6 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.setTime(extensionSeconds);
   }
 
-
   timerStart(): void {
     this.timerStop();
 
@@ -106,6 +107,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   next(): void {
+    this.alreadyPlayed = true;
     this.setTime(45);
   }
 }
