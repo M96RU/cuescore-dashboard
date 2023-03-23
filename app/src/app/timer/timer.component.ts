@@ -83,6 +83,12 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.setTime(extensionSeconds);
   }
 
+  vibrate(pattern: VibratePattern) : void {
+    if (window && window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(pattern);
+    }
+  }
+
   timerStart(): void {
     this.timerStop();
 
@@ -96,7 +102,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
         if (timeLeft <= 20 && !this.alreadyVibrateWarning) {
           this.alreadyVibrateWarning = true;
-          window.navigator.vibrate([700]);
+          this.vibrate([700]);
         }
 
         if (timeLeft > 0) {
@@ -106,7 +112,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
           if (!this.alreadyVibrateFault) {
             this.alreadyVibrateFault = true;
-            window.navigator.vibrate([500, 500, 500, 500, 1000]);
+            this.vibrate([500, 500, 500, 500, 1000]);
           }
         }
       } else {
