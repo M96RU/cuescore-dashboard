@@ -1,32 +1,42 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {interval, Subscription} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Component, Input, OnInit} from '@angular/core';
+import {Match} from 'src/app/model/match';
+import {Timer} from 'src/app/model/timer';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss']
 })
-export class TimerComponent implements OnInit, OnDestroy {
+export class TimerComponent implements OnInit {
 
-  private subscription: Subscription | undefined;
+  @Input()
+  match: Match | undefined;
 
   before: Date | undefined;
 
-  time: number = 90;
+  // time: number = 90;
 
-  alreadyVibrateFault = false;
-  alreadyVibrateWarning = false;
   alreadyBreak = false;
   alreadyPlayed = false;
   alreadyExtA = false;
   alreadyExtB = false;
 
-  constructor() {
+  constructor(
+    private httpClient: HttpClient
+  ) {
   }
 
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+  pushTimerData(): void {
+    if (this.match) {
+      const timer = new Timer();
+      timer.id = this.match.id;
+      timer.beforeMillis = this.before?.getTime();
+      this.httpClient.post('https://cuescore-dashboard-api.vercel.app/api/match', timer).subscribe();
+      // this.httpClient.post('http://localhost:5000/api/match', timer).subscribe();
+    }
   }
+
 
   ngOnInit(): void {
   }
@@ -41,8 +51,6 @@ export class TimerComponent implements OnInit, OnDestroy {
   restart(): void {
     this.timerStop();
 
-    this.alreadyVibrateFault = false;
-    this.alreadyVibrateWarning = false;
     this.alreadyBreak = false;
     this.alreadyPlayed = false;
     this.alreadyExtA = false;
@@ -58,7 +66,8 @@ export class TimerComponent implements OnInit, OnDestroy {
     before.setTime(beforeMillis);
 
     this.before = before;
-    this.time = seconds;
+    // this.time = seconds;
+    this.pushTimerData();
   }
 
   extensionA(): void {
@@ -72,8 +81,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   extension(): void {
-    this.alreadyVibrateFault = false;
-    this.alreadyVibrateWarning = false;
+    // this.alreadyVibrateFault = false;
+    // this.alreadyVibrateWarning = false;
     let millisExtension = 45 * 1000;
     if (this.before) {
       const now = new Date();
@@ -83,55 +92,21 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.setTime(extensionSeconds);
   }
 
-  vibrate(pattern: VibratePattern) : void {
-    if (window && window.navigator && window.navigator.vibrate) {
-      window.navigator.vibrate(pattern);
-    }
-  }
-
   timerStart(): void {
     this.timerStop();
 
     this.setTime(90);
 
-    this.subscription = interval(1000).subscribe(x => {
-      if (this.before) {
-        const millis = this.before.getTime() - new Date().getTime();
-
-        const timeLeft = Math.round(millis / 1000);
-
-        if (timeLeft <= 20 && !this.alreadyVibrateWarning) {
-          this.alreadyVibrateWarning = true;
-          this.vibrate([700]);
-        }
-
-        if (timeLeft > 0) {
-          this.time = timeLeft;
-        } else {
-          this.time = 0;
-
-          if (!this.alreadyVibrateFault) {
-            this.alreadyVibrateFault = true;
-            this.vibrate([500, 500, 500, 500, 1000]);
-          }
-        }
-      } else {
-        this.time = 90;
-      }
-    });
   }
 
   timerStop(): void {
     this.before = undefined;
-    this.time = 90;
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    // this.time = 90;
   }
 
   next(): void {
-    this.alreadyVibrateFault = false;
-    this.alreadyVibrateWarning = false;
+    // this.alreadyVibrateFault = false;
+    // this.alreadyVibrateWarning = false;
     this.alreadyPlayed = true;
     this.setTime(45);
   }

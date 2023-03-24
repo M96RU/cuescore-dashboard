@@ -34,6 +34,13 @@
         <td *matCellDef="let match" mat-cell><mat-icon *ngIf="match.scorerUrl" (click)="openMatchScorer(match);">scoreboard</mat-icon></td>
       </ng-container>
 
+      <ng-container matColumnDef="timer">
+        <td *matCellDef="let match" mat-cell>
+          <mat-icon *ngIf="match.scorerUrl" (click)="openMatchTimer(match);">av_timer</mat-icon>
+          <mat-icon *ngIf="match.scorerUrl" routerLink="match/{{match.id}}">looks_4</mat-icon>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="playerA">
         <td *matCellDef="let match" mat-cell>
           <app-player [hidden]="!match.playerA" [matchContext]="match" [player]="match.playerA" [clic]=true></app-player>

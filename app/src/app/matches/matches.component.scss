@@ -6,9 +6,10 @@ table {
   cursor: pointer;
 }
 
-.mat-column-scorer {
+.mat-column-scorer,
+.mat-column-timer {
   cursor: pointer;
-  padding-left: 15px;
+  text-align: center;
 }
 
 .matches-menu {
@@ -46,6 +47,7 @@ table {
 .mat-column-playerA {
   text-align: right;
 }
+
 .mat-column-playerB {
   text-align: left;
 }
