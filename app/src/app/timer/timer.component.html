@@ -1,6 +1,6 @@
 <mat-icon class="home-link" routerLink="">home</mat-icon>
 <mat-grid-list cols="2" rowHeight="10:1">
-  <mat-grid-tile class="time" [class.warning]="time<20" colspan="2" rowspan="5">
+  <mat-grid-tile [class.warning]="time<=20" class="time" colspan="2" rowspan="5">
     <div [hidden]="time == 0">{{time}}</div>
     <div [hidden]="time > 0">FAUTE</div>
   </mat-grid-tile>

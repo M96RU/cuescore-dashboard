@@ -14,6 +14,8 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   time: number = 90;
 
+  alreadyVibrateFault = false;
+  alreadyVibrateWarning = false;
   alreadyBreak = false;
   alreadyPlayed = false;
   alreadyExtA = false;
@@ -39,6 +41,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   restart(): void {
     this.timerStop();
 
+    this.alreadyVibrateFault = false;
+    this.alreadyVibrateWarning = false;
     this.alreadyBreak = false;
     this.alreadyPlayed = false;
     this.alreadyExtA = false;
@@ -68,6 +72,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   extension(): void {
+    this.alreadyVibrateFault = false;
+    this.alreadyVibrateWarning = false;
     let millisExtension = 45 * 1000;
     if (this.before) {
       const now = new Date();
@@ -75,6 +81,12 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
     const extensionSeconds: number = Math.round(millisExtension / 1000);
     this.setTime(extensionSeconds);
+  }
+
+  vibrate(pattern: VibratePattern) : void {
+    if (window && window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(pattern);
+    }
   }
 
   timerStart(): void {
@@ -87,10 +99,21 @@ export class TimerComponent implements OnInit, OnDestroy {
         const millis = this.before.getTime() - new Date().getTime();
 
         const timeLeft = Math.round(millis / 1000);
+
+        if (timeLeft <= 20 && !this.alreadyVibrateWarning) {
+          this.alreadyVibrateWarning = true;
+          this.vibrate([700]);
+        }
+
         if (timeLeft > 0) {
           this.time = timeLeft;
         } else {
           this.time = 0;
+
+          if (!this.alreadyVibrateFault) {
+            this.alreadyVibrateFault = true;
+            this.vibrate([500, 500, 500, 500, 1000]);
+          }
         }
       } else {
         this.time = 90;
@@ -107,6 +130,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   }
 
   next(): void {
+    this.alreadyVibrateFault = false;
+    this.alreadyVibrateWarning = false;
     this.alreadyPlayed = true;
     this.setTime(45);
   }
