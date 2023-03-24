@@ -29,6 +29,9 @@ import { PlayerComponent } from './player/player.component';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { TimerComponent } from './timer/timer.component';
 import { HomeComponent } from './home/home.component';
+import { MatchScoreboardComponent } from 'src/app/match-scoreboard/match-scoreboard.component';
+import { MatchTimerComponent } from './match-timer/match-timer.component';
+import { TimerCountdownComponent } from './timer-countdown/timer-countdown.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { HomeComponent } from './home/home.component';
     MatchesComponent,
     PlayerDetailComponent,
     TimerComponent,
-    HomeComponent
+    HomeComponent,
+    MatchScoreboardComponent,
+    MatchTimerComponent,
+    TimerCountdownComponent
   ],
   imports: [
     /**

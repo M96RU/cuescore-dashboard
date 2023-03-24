@@ -1,5 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {IntegrationData} from 'src/app/integration/integration-data';
+import {MatchTimerComponent} from 'src/app/match-timer/match-timer.component';
 import {Match} from 'src/app/model/match';
 import {Tournament} from 'src/app/model/tournament';
 
@@ -25,10 +27,10 @@ export class MatchesComponent implements OnInit, OnChanges {
   matches: Match[] = [];
   availableTables: number[] | undefined;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
-  displayedColumns: string[] = ['table', 'tournament', 'order', 'scorer', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
+  displayedColumns: string[] = ['table', 'tournament', 'order', 'scorer', 'timer', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
 
   ngOnInit(): void {
   }
@@ -170,5 +172,13 @@ export class MatchesComponent implements OnInit, OnChanges {
     if (match.scorerUrl) {
       window.open(match.scorerUrl, 'scorer', 'popup');
     }
+  }
+
+  openMatchTimer(match: Match): void {
+    this.dialog.open(MatchTimerComponent, {
+      data: match,
+      minWidth: '100%',
+      minHeight: '100%'
+    });
   }
 }

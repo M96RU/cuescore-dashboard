@@ -1,8 +1,7 @@
-<mat-icon class="home-link" routerLink="">home</mat-icon>
+<mat-icon *ngIf="!match" class="home-link" routerLink="">home</mat-icon>
 <mat-grid-list cols="2" rowHeight="10:1">
-  <mat-grid-tile [class.warning]="time<=20" class="time" colspan="2" rowspan="5">
-    <div [hidden]="time == 0">{{time}}</div>
-    <div [hidden]="time > 0">FAUTE</div>
+  <mat-grid-tile class="time" colspan="2" rowspan="5">
+    <app-timer-countdown [before] = before></app-timer-countdown>
   </mat-grid-tile>
   <mat-grid-tile>
     <button (click)="start()" [disabled]="alreadyBreak" color="primary" mat-raised-button>Casse</button>
