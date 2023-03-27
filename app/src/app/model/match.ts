@@ -8,6 +8,7 @@ export class Match {
   tournament: string | undefined;
   round: string | undefined;
   order: string | undefined;
+  tableCuescoreId: string | undefined;
   tableNum: number | undefined;
   tableNumWarning: string | undefined;
   scorerUrl: string | undefined;

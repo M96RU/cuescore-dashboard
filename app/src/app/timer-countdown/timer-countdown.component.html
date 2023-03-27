@@ -1,4 +1,4 @@
-<div [class.warning]="time<=20">
-  <span class="time" [hidden]="time == 0">{{time}}</span>
-  <span [hidden]="time > 0">FAUTE</span>
-</div>
+<span [class.warning]="time<=20" class="timer-countdown-container">
+  <span class="time" [hidden]="time==0">{{time}}</span>
+  <span class="fault" [hidden]="time>0">FAUTE</span>
+</span>

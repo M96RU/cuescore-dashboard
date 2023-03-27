@@ -31,13 +31,13 @@
       </ng-container>
 
       <ng-container matColumnDef="scorer">
-        <td *matCellDef="let match" mat-cell><mat-icon *ngIf="match.scorerUrl" (click)="openMatchScorer(match);">scoreboard</mat-icon></td>
+        <td *matCellDef="let match" mat-cell><mat-icon *ngIf="match.scorerUrl" (click)="openMatchScorer(match);">edit</mat-icon></td>
       </ng-container>
 
       <ng-container matColumnDef="timer">
         <td *matCellDef="let match" mat-cell>
           <mat-icon *ngIf="match.scorerUrl" (click)="openMatchTimer(match);">av_timer</mat-icon>
-          <mat-icon *ngIf="match.scorerUrl" routerLink="match/{{match.id}}">looks_4</mat-icon>
+          <mat-icon *ngIf="match.scorerUrl" routerLink="match/{{match.id}}" [queryParams]="{tableId: match.tableCuescoreId}" er>scoreboard</mat-icon>
         </td>
       </ng-container>
 
