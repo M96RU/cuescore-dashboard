@@ -181,4 +181,12 @@ export class MatchesComponent implements OnInit, OnChanges {
       minHeight: '100%'
     });
   }
+
+  openMatchScoreboard(match: Match): void {
+    let url = '/match/' + match.id;
+    if (match.tableCuescoreId) {
+      url += '?tableId=' + match.tableCuescoreId;
+    }
+    window.open(url, 'scoreboard');
+  }
 }

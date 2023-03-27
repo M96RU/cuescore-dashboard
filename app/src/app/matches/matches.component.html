@@ -37,7 +37,7 @@
       <ng-container matColumnDef="timer">
         <td *matCellDef="let match" mat-cell>
           <mat-icon *ngIf="match.scorerUrl" (click)="openMatchTimer(match);">av_timer</mat-icon>
-          <mat-icon *ngIf="match.scorerUrl" routerLink="match/{{match.id}}" [queryParams]="{tableId: match.tableCuescoreId}" er>scoreboard</mat-icon>
+          <mat-icon *ngIf="match.scorerUrl" (click)="openMatchScoreboard(match);">scoreboard</mat-icon>
         </td>
       </ng-container>
 
