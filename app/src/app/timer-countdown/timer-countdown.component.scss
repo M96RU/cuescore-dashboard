@@ -1,10 +1,19 @@
+.time,
+.fault {
+  padding: 7px;
+  background-color: #dbdbdb;
+  font-weight: bold;
+}
+
+.time {
+  border-radius: 17px;
+  font-size: calc((75vw - 4.5rem) / 9);
+}
+
 .warning {
   color: red;
 }
 
-.time {
-  text-align: center;
-  font-weight: bold;
-  font-size: xxx-large;
-  background-color: beige;
+.fault {
+  font-size: calc((75vw - 4.5rem) / 30);
 }

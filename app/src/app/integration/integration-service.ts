@@ -167,6 +167,7 @@ export class IntegrationService {
 
                 const table = this.parseTable(cuescoreMatch.table)
                 if (table) {
+                  match.tableCuescoreId = table.tableId;
                   match.tableNum = table.num;
                   if (match.status != 'finished') {
                     match.scorerUrl = table.scorerUrl;
