@@ -1,19 +1,36 @@
-.time,
-.fault {
-  padding: 7px;
-  background-color: #dbdbdb;
+.timer-countdown-container {
+  width: 100%;
+  height: 100%;
+}
+
+.timer-countdown-time {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: 100%;
+  height: 80%;
+
+  line-height: 100%;
+  background-color: #172266;
+  color: white;
+  border-radius: 25px;
+
+  font-size: 100px;
   font-weight: bold;
 }
 
-.time {
-  border-radius: 17px;
-  font-size: calc((75vw - 4.5rem) / 9);
+.timer-countdown-fault {
+  display:flex;
+  justify-content:center;
+  //align-items:center;
+  width: 100%;
+  height: 20%;
+
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: bold;
 }
 
-.warning {
+.warning .timer-countdown-time {
   color: red;
-}
-
-.fault {
-  font-size: calc((75vw - 4.5rem) / 30);
 }

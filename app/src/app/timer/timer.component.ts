@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, Input, OnInit} from '@angular/core';
-import {Match} from 'src/app/model/match';
 import {Timer} from 'src/app/model/timer';
 
 @Component({
@@ -11,7 +10,7 @@ import {Timer} from 'src/app/model/timer';
 export class TimerComponent implements OnInit {
 
   @Input()
-  match: Match | undefined;
+  matchId: string | undefined;
 
   before: Date | undefined;
 
@@ -28,12 +27,11 @@ export class TimerComponent implements OnInit {
   }
 
   pushTimerData(): void {
-    if (this.match) {
+    if (this.matchId) {
       const timer = new Timer();
-      timer.id = this.match.id;
+      timer.id = this.matchId;
       timer.beforeMillis = this.before?.getTime();
       this.httpClient.post('https://cuescore-dashboard-api.vercel.app/api/match', timer).subscribe();
-      // this.httpClient.post('http://localhost:5000/api/match', timer).subscribe();
     }
   }
 

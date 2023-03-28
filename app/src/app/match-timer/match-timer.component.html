@@ -1,1 +1,4 @@
-<app-timer [match]="match"></app-timer>
+<iframe *ngIf="cuescoreUrl" [src]="cuescoreUrl" id="cuescore-scoreboard" title="Cuescore Scoreboard"></iframe>
+<div class="match-timer-container">
+  <app-timer [matchId]="matchId"></app-timer>
+</div>

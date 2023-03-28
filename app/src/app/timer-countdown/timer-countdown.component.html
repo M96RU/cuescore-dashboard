@@ -1,4 +1,6 @@
-<span [class.warning]="time<=20" class="timer-countdown-container">
-  <span class="time" [hidden]="time==0">{{time}}</span>
-  <span class="fault" [hidden]="time>0">FAUTE</span>
-</span>
+<div [class.warning]="time<=20" class="timer-countdown-container">
+  <div class="timer-countdown-time">{{time}}</div>
+  <div *ngIf="time==0" class="timer-countdown-fault">FAUTE</div>
+</div>
+
+

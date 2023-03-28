@@ -175,15 +175,21 @@ export class MatchesComponent implements OnInit, OnChanges {
   }
 
   openMatchTimer(match: Match): void {
-    this.dialog.open(MatchTimerComponent, {
-      data: match,
-      minWidth: '100%',
-      minHeight: '100%'
-    });
+    let url = '/match/' + match.id + '/timer';
+    if (match.tableCuescoreId) {
+      url += '?tableId=' + match.tableCuescoreId;
+    }
+    window.open(url, 'timer');
+
+    // this.dialog.open(MatchTimerComponent, {
+    //   data: match,
+    //   minWidth: '100%',
+    //   minHeight: '100%'
+    // });
   }
 
   openMatchScoreboard(match: Match): void {
-    let url = '/match/' + match.id;
+    let url = '/match/' + match.id + '/scoreboard';
     if (match.tableCuescoreId) {
       url += '?tableId=' + match.tableCuescoreId;
     }

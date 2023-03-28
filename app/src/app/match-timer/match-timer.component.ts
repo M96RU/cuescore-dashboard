@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Match} from 'src/app/model/match';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-match-timer',
@@ -9,9 +10,29 @@ import {Match} from 'src/app/model/match';
 })
 export class MatchTimerComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public match: Match | undefined) { }
+  matchId: string | undefined
+
+  cuescoreUrl: SafeResourceUrl | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private sanitizer: DomSanitizer,
+  ) {
+  }
 
   ngOnInit(): void {
+    const matchIdPathParam = this.route.snapshot.paramMap.get('id');
+    const tableId = this.route.snapshot.queryParamMap.get('tableId');
+
+    if (tableId) {
+      const url = 'https://cuescore.com/scoreboard/overlay/?tableId=' + tableId;
+      this.cuescoreUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+
+    if (matchIdPathParam) {
+      this.matchId = matchIdPathParam;
+    }
   }
 
 }
