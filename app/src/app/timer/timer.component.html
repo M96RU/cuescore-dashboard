@@ -9,8 +9,8 @@
     <button (click)="next()" [disabled]="!before || !alreadyBreak" color="primary" mat-raised-button>Suivant</button>
   </div>
   <div class="timer-buttons">
-    <button (click)="extensionA()" [disabled]="!before || !alreadyPlayed || alreadyExtA" color="warn" mat-raised-button>Extension A</button>
-    <button (click)="extensionB()" [disabled]="!before || !alreadyPlayed || alreadyExtB" color="warn" mat-raised-button>Extension B</button>
+    <button class="extension-a" (click)="extensionA()" [disabled]="!before || !alreadyPlayed || alreadyExtA" mat-raised-button>Extension Jaunes</button>
+    <button class="extension-b" (click)="extensionB()" [disabled]="!before || !alreadyPlayed || alreadyExtB" mat-raised-button>Extension Rouges</button>
   </div>
   <div (click)="restart()" [class.disabled]="!before" class="timer-restart">
     <button (click)="restart()" [disabled]="!before" color="accent" mat-raised-button>Nouvelle Partie</button>
