@@ -18,7 +18,7 @@
 .timer-countdown app-timer-countdown {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  //padding: 10px;
 }
 
 .timer-buttons,
@@ -30,12 +30,11 @@
 
 .timer-buttons button {
   width: 50%;
-  margin: 10px;
+  //margin: 10px;
 }
 
 .timer-restart button {
   width: 100%;
-  margin: 10px;
 }
 
 .extension-a {
@@ -45,4 +44,20 @@
 .extension-b {
   background-color: red;
   color: white;
+}
+
+@media (orientation: portrait), (min-device-width : 1030px) {
+  .timer-countdown app-timer-countdown,
+  .timer-buttons button,
+  .timer-restart button {
+    margin: 10px;
+  }
+}
+
+@media (orientation: landscape) and (max-device-width : 1030px) {
+  .timer-countdown app-timer-countdown,
+  .timer-buttons button,
+  .timer-restart button {
+    margin: 1px;
+  }
 }
