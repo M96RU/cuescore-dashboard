@@ -2,6 +2,12 @@ table {
   width: 100%;
 }
 
+.matches-menu {
+  background-color: white;
+  position: sticky;
+  top: 0px;
+}
+
 .matches-menu .mat-icon {
   cursor: pointer;
 }
