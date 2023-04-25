@@ -82,8 +82,8 @@
 
       <ng-container matColumnDef="minutes">
         <td *matCellDef="let match" mat-cell>
-          <span *ngIf="match.minutes" [class.warning]="match.minutes && match.minutes > 10*(match.raceTo*2-1)">
-            <mat-icon *ngIf="match.minutes > 7*(match.raceTo*2-1)">timer</mat-icon>
+          <span *ngIf="match.minutes" [class.warning]="match.minutes && match.minutes > 12*(match.raceTo*2-1)">
+            <mat-icon *ngIf="match.minutes > 10*(match.raceTo*2-1)">timer</mat-icon>
             {{match.minutes}}'
           </span>
         </td>
