@@ -119,8 +119,19 @@ export class IntegrationService {
 
                 if (match.startTime) {
                   const dateToCompare = match.finishedTime || new Date();
-                  const millis = dateToCompare.getTime() - match.startTime.getTime()
+                  const millis = dateToCompare.getTime() - match.startTime.getTime();
                   match.minutes = Math.round(millis / 60000);
+
+                  let maxMinutes = 60; // 1h by default
+                  if (match.raceTo) {
+                    if (match.raceTo >= 5) {
+                      maxMinutes = 105; // 1h45
+                    } else if (match.raceTo >= 4) {
+                      maxMinutes = 75; // 1h15
+                    }
+                  }
+                  const maxTimeMillis = match.startTime.getTime() + maxMinutes * 60000;
+                  match.maxTime = new Date(maxTimeMillis);
                 }
 
                 // Players

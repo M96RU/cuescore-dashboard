@@ -27,5 +27,6 @@ export class Match {
   playerBtable: number | undefined;
   startTime: Date | undefined;
   finishedTime: Date | undefined;
-  minutes: number | undefined; // duration
+  minutes: number | undefined; // duration in minutes
+  maxTime: Date | undefined; // end of match
 }

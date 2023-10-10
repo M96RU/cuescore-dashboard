@@ -21,6 +21,7 @@ import {MatchesComponent} from 'src/app/matches/matches.component';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {ChronoComponent} from './chrono/chrono.component';
 import {MatchComponent} from './match/match.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
@@ -38,6 +39,7 @@ import { TimerCountdownComponent } from './timer-countdown/timer-countdown.compo
     AppComponent,
     TournamentComponent,
     TableComponent,
+    ChronoComponent,
     MatchComponent,
     ScheduleComponent,
     PlayerComponent,

@@ -30,7 +30,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   constructor(private dialog: MatDialog) {
   }
 
-  displayedColumns: string[] = ['table', 'tournament', 'order', 'scorer', 'timer', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
+  displayedColumns: string[] = ['chrono', 'table', 'tournament', 'order', 'scorer', 'timer', 'playerA', 'playerAscore', 'raceTo', 'playerBscore', 'playerB', 'start', 'end', 'minutes'];
 
   ngOnInit(): void {
   }

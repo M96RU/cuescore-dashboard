@@ -14,6 +14,10 @@
 
     <table [dataSource]="matches" class="mat-elevation-z8" mat-table>
 
+      <ng-container matColumnDef="chrono">
+        <td *matCellDef="let match" mat-cell><app-chrono [match]="match"></app-chrono></td>
+      </ng-container>
+
       <ng-container matColumnDef="table">
         <td *matCellDef="let match" mat-cell>
           <span *ngIf="!match.tableNumWarning && (!tournament || match.status != 'finished' && match.tableNum)">Table {{match.tableNum}}</span>

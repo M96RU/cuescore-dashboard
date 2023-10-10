@@ -1,0 +1,10 @@
+<mat-chip-list *ngIf="ready && match && !match.finishedTime">
+  <mat-chip *ngIf="match.startTime" [color]="chipColor" [selected]="chipColor && displayAlert" >
+    <div (click)="setWarnAsDone(alertName);" [class.alert]="displayAlert">
+      <mat-icon *ngIf="displayAlert" >campaign</mat-icon>
+      <span *ngIf="!timeOver">{{minutesLeft}}:<span *ngIf="secondsLeft && secondsLeft<10 || secondsLeft==0">0</span>{{secondsLeft}}</span>
+      <span *ngIf="timeOver">FIN DU TEMPS</span>
+      <mat-icon *ngIf="displayAlert" >campaign</mat-icon>
+    </div>
+  </mat-chip>
+</mat-chip-list>
