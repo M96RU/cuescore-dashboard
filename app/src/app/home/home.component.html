@@ -5,8 +5,10 @@
     Refresh
   </div>
   <div class="menu-item live" (click)="selectTournament(undefined)">LIVE</div>
+  <div class="menu-item" *ngIf="!readonly" (click)="copySharedUrl();"><mat-icon>share</mat-icon></div>
   <!--  <div class="menu-item" *ngFor="let tournament of integrationData.value.tournaments" (click)="selectTournament(tournament)">{{tournament.name}}</div>-->
-  <app-tournament [data]="integrationData.value" (tournament)="selectTournament($event)" (launchIntegration)="updateData()"></app-tournament>
+  <app-tournament *ngIf="!readonly" [data]="integrationData.value" (tournament)="selectTournament($event)" (launchIntegration)="updateData()"></app-tournament>
+  <div class="menu-item" (click)="selectTournament(undefined)">LIVE</div>
 
   <div class="menu-item" routerLink="timer">TIMER</div>
 

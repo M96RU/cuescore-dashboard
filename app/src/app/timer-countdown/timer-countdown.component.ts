@@ -21,8 +21,6 @@ export class TimerCountdownComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   refresh(): void {
-    console.log(this.before);
-    console.log(new Date().getTime());
     const beforeMillis = this.before?.getTime();
     if (beforeMillis) {
       const millis = beforeMillis - new Date().getTime();

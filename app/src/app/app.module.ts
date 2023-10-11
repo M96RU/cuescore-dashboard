@@ -21,6 +21,7 @@ import {MatchesComponent} from 'src/app/matches/matches.component';
 import {TournamentService} from 'src/app/tournament/tournament.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {ChronoComponent} from './chrono/chrono.component';
 import {MatchComponent} from './match/match.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {TableComponent} from './table/table.component';
@@ -32,12 +33,14 @@ import { HomeComponent } from './home/home.component';
 import { MatchScoreboardComponent } from 'src/app/match-scoreboard/match-scoreboard.component';
 import { MatchTimerComponent } from './match-timer/match-timer.component';
 import { TimerCountdownComponent } from './timer-countdown/timer-countdown.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     TournamentComponent,
     TableComponent,
+    ChronoComponent,
     MatchComponent,
     ScheduleComponent,
     PlayerComponent,
@@ -79,7 +82,8 @@ import { TimerCountdownComponent } from './timer-countdown/timer-countdown.compo
     MatTooltipModule,
     MatDialogModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSnackBarModule
   ],
   providers: [
     IntegrationService,
