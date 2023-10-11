@@ -104,3 +104,5 @@ dist
 .tern-port
 
 cuescore-dashboard.iml
+
+app/yarn.lock
