@@ -33,6 +33,7 @@ import { HomeComponent } from './home/home.component';
 import { MatchScoreboardComponent } from 'src/app/match-scoreboard/match-scoreboard.component';
 import { MatchTimerComponent } from './match-timer/match-timer.component';
 import { TimerCountdownComponent } from './timer-countdown/timer-countdown.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { TimerCountdownComponent } from './timer-countdown/timer-countdown.compo
     MatTooltipModule,
     MatDialogModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSnackBarModule
   ],
   providers: [
     IntegrationService,

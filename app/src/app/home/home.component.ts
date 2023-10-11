@@ -1,8 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {BehaviorSubject, interval, Subscription} from 'rxjs';
 import {IntegrationData} from 'src/app/integration/integration-data';
 import {IntegrationService} from 'src/app/integration/integration-service';
 import {Tournament} from 'src/app/model/tournament';
+import {TournamentService} from '../tournament/tournament.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +16,23 @@ export class HomeComponent implements OnDestroy {
 
   private readonly integrationSubscription: Subscription;
 
+  readonly: string[] | undefined;
+
   integrationData: BehaviorSubject<IntegrationData> = new BehaviorSubject<IntegrationData>(new IntegrationData());
 
   tournament: Tournament | undefined;
 
   constructor(
-    private integrationService: IntegrationService
+    private integrationService: IntegrationService,
+    private tournamentService: TournamentService,
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
+
+    const stringTournaments = this.activatedRoute.snapshot.queryParamMap.get('tournaments');
+    if (stringTournaments) {
+      this.readonly = stringTournaments.split('_');
+    }
 
     // first init
     this.updateData();
@@ -36,8 +49,29 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
+  copySharedUrl(): void {
+
+    const savedTournaments = this.tournamentService.getTournaments();
+    if (savedTournaments && savedTournaments.length > 0) {
+      const readonlyUrl = window.location.href + '?tournaments=' + savedTournaments.join('_');
+      navigator.clipboard.writeText(readonlyUrl);
+      this.snackBar.open('Copié: '+readonlyUrl, undefined, {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 1500
+      });
+    } else {
+      this.snackBar.open('Non copié... aucun tournoi configuré', undefined, {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 1500
+      });
+
+    }
+  }
+
   updateData() {
-    this.integrationService.retrieveIntegrationData().subscribe(update => {
+    this.integrationService.retrieveIntegrationData(this.readonly).subscribe(update => {
       // if (!this.tournament && update.tournaments.length>0) {
       //   this.selectTournament(update.tournaments[0]);
       // }
@@ -49,6 +83,5 @@ export class HomeComponent implements OnDestroy {
   selectTournament(tournament: Tournament | undefined): void {
     this.tournament = tournament;
   }
-
 
 }

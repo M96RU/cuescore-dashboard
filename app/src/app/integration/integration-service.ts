@@ -80,9 +80,9 @@ export class IntegrationService {
     }
   }
 
-  retrieveIntegrationData(): Observable<IntegrationData> {
+  retrieveIntegrationData(readonly: string[] | undefined): Observable<IntegrationData> {
 
-    const tournaments = this.tournamentService.getTournaments();
+    const tournaments = readonly || this.tournamentService.getTournaments();
 
     if (tournaments.length == 0) {
       return of(new IntegrationData());
