@@ -1,4 +1,5 @@
-<mat-card>
+<app-mobile *ngIf="smallScreen" [matches]="matches"></app-mobile>
+<mat-card *ngIf="!smallScreen">
   <mat-card-content>
     <span *ngIf="tournament" class="matches-menu">
       <mat-slide-toggle (change)="refreshMatches()" [(ngModel)]="displayBlanks" color="primary">Walk Over</mat-slide-toggle>

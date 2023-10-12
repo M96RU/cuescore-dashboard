@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="!smallScreen">
   <div class="menu-item" (click)="updateData()">
     Last update : {{integrationData.value.date | date:'HH\'h\'mm' }}
     <mat-icon color="primary">refresh</mat-icon>
@@ -14,7 +14,5 @@
 </mat-toolbar>
 
 <div class="content">
-  <!--  <app-table [data]="integrationData.value"></app-table>-->
-  <app-matches [data]="integrationData.value" [tournament]="tournament"></app-matches>
-  <!--  <app-schedule [data]="integrationData.value"></app-schedule>-->
+  <app-matches [smallScreen]="smallScreen" ng [data]="integrationData.value" [tournament]="tournament"></app-matches>
 </div>

@@ -34,6 +34,8 @@ import { MatchScoreboardComponent } from 'src/app/match-scoreboard/match-scorebo
 import { MatchTimerComponent } from './match-timer/match-timer.component';
 import { TimerCountdownComponent } from './timer-countdown/timer-countdown.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MobileComponent } from './mobile/mobile.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HomeComponent,
     MatchScoreboardComponent,
     MatchTimerComponent,
+    MobileComponent,
     TimerCountdownComponent
   ],
   imports: [
@@ -83,7 +86,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDialogModule,
     MatDividerModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [
     IntegrationService,
