@@ -6,6 +6,7 @@ import {IntegrationService} from 'src/app/integration/integration-service';
 import {Tournament} from 'src/app/model/tournament';
 import {TournamentService} from '../tournament/tournament.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -22,12 +23,26 @@ export class HomeComponent implements OnDestroy {
 
   tournament: Tournament | undefined;
 
+  smallScreen = false;
+
   constructor(
     private integrationService: IntegrationService,
     private tournamentService: TournamentService,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private responsive: BreakpointObserver
   ) {
+
+    this.responsive.observe(Breakpoints.Web)
+      .subscribe(result => {
+
+        if (result.matches) {
+          this.smallScreen = false;
+        } else {
+          this.smallScreen = true;
+        }
+
+  });
 
     const stringTournaments = this.activatedRoute.snapshot.queryParamMap.get('tournaments');
     if (stringTournaments) {

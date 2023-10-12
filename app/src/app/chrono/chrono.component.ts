@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Match} from 'src/app/model/match';
 import {interval, Subscription} from 'rxjs';
 import {ThemePalette} from '@angular/material/core';
@@ -8,7 +8,7 @@ import {ThemePalette} from '@angular/material/core';
   templateUrl: './chrono.component.html',
   styleUrls: ['./chrono.component.scss']
 })
-export class ChronoComponent implements OnInit {
+export class ChronoComponent implements OnInit, OnChanges {
 
   ready = false;
 
@@ -33,6 +33,11 @@ export class ChronoComponent implements OnInit {
 
 
   constructor() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.timeOver = false;
+    this.displayAlert = false;
   }
 
   ngOnInit(): void {

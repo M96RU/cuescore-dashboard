@@ -1,0 +1,15 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Tables">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngFor="let match of matches">
+    <button *ngIf="match.playerA && match.playerB" mat-menu-item  (click)="selected=match">
+      <span><b>Table {{match.tableNum}}</b> - {{match.playerA.name}} - {{match.playerB.name}} : {{match.playerAscore}} - {{match.playerBscore}}</span>
+    </button>
+  </div>
+</mat-menu>
+
+<div *ngIf="selected" class="match-container">
+  <div class="chrono-container"><app-chrono style="text-align: right;" [match]="selected"></app-chrono></div>
+  <app-match [match]="selected"></app-match>
+</div>

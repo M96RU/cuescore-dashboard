@@ -24,6 +24,9 @@ export class MatchesComponent implements OnInit, OnChanges {
   @Input()
   tournament: Tournament | undefined;
 
+  @Input()
+  smallScreen: boolean = false;
+  
   matches: Match[] = [];
   availableTables: number[] | undefined;
 
@@ -42,7 +45,7 @@ export class MatchesComponent implements OnInit, OnChanges {
   refreshMatches() {
     if (this.data) {
 
-      if (!this.tournament) {
+      if (this.smallScreen || !this.tournament) {
         this.availableTables = undefined;
         this.matches = this.computeLiveMatches(this.data.matches);
       } else {
