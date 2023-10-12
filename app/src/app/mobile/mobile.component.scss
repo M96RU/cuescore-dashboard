@@ -1,4 +1,16 @@
-.chrono-container {
+.table-container {
+    font-weight: bold;
+}
+
+app-chrono {
+    float: right;
+}
+
+.close-container {
     display: flex;
     flex-direction: row-reverse;
+}
+
+mat-card {
+    cursor: pointer;
 }

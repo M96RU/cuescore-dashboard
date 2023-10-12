@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Match} from 'src/app/model/match';
 
 @Component({
@@ -6,7 +6,7 @@ import {Match} from 'src/app/model/match';
   templateUrl: './mobile.component.html',
   styleUrls: ['./mobile.component.scss']
 })
-export class MobileComponent implements OnInit, OnChanges {
+export class MobileComponent implements OnInit {
 
   @Input()
   matches: Match[] = [];
@@ -17,17 +17,6 @@ export class MobileComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.setDefaultMatch();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.setDefaultMatch();
-  }
-
-  setDefaultMatch(): void {
-    if (!this.selected) {
-      this.selected = this.matches.find(current => current.startTime);
-    }
   }
 
 }
