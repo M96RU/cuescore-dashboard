@@ -114,8 +114,12 @@ export class IntegrationService {
                 match.tournament = tournament.name; // to remove
                 match.round = cuescoreMatch.roundName;
                 match.order = cuescoreMatch.matchno;
-                match.startTime = this.parseDateTime(cuescoreMatch.starttime);
-                match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime);
+                if (match.status != 'waiting') {
+                  match.startTime = this.parseDateTime(cuescoreMatch.starttime);
+                }
+                if (match.status == 'finished') {
+                  match.finishedTime = this.parseDateTime(cuescoreMatch.stoptime);
+                }
 
                 if (match.startTime) {
                   const dateToCompare = match.finishedTime || new Date();
@@ -254,10 +258,6 @@ export class IntegrationService {
 
             const millis = new Date().getTime() - player.pauseSince.getTime()
             player.pauseMinutes = Math.round(millis / 60000);
-          } else {
-            const playerA = lastFinishedMatches.playerA?.name || lastFinishedMatches.playerAname;
-            const playerB = lastFinishedMatches.playerB?.name || lastFinishedMatches.playerBname;
-            console.warn('Pas de date de fin pour le match terminé:' + lastFinishedMatches.id + 'du tournoi ' + lastFinishedMatches.tournament + ' entre ' + playerA + ' et ' + playerB);
           }
         }
       }
