@@ -8,13 +8,14 @@
   <div *ngFor="let match of matches">
     <div *ngIf="match.playerA && match.playerB" >
 
-      <mat-card *ngIf="!selected || selected.tableNum === match.tableNum " (click)="selected=match;">
+      <mat-card *ngIf="!selected || selected.tableNum === match.tableNum" (click)="selected=match;">
         <mat-card-title-group>
           <app-chrono [match]="match"></app-chrono>
           <mat-card-subtitle>Table {{match.tableNum}}</mat-card-subtitle>
         </mat-card-title-group>
         <mat-card-content>
           <app-match [match]="match"></app-match>
+          <app-timer *ngIf="selected && selected.tableNum === match.tableNum" [matchId]="match.id"></app-timer>
         </mat-card-content>
       </mat-card>
 
