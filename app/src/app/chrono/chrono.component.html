@@ -8,3 +8,12 @@
     </div>
   </mat-chip>
 </mat-chip-list>
+<mat-chip-list *ngIf="match && match.status == 'playing' && !match.startTime">
+  <mat-chip>
+    <div>
+      <mat-icon>campaign</mat-icon>
+      <span>DATE DEBUT ?</span>
+      <mat-icon>campaign</mat-icon>
+    </div>
+  </mat-chip>
+</mat-chip-list>
