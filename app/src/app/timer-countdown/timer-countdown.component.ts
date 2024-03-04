@@ -11,6 +11,9 @@ export class TimerCountdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   before: Date | undefined;
 
+  @Input()
+  paused: boolean = false;
+
   time: number = 90;
   alreadyVibrateFault = false;
   alreadyVibrateWarning = false;
@@ -23,30 +26,33 @@ export class TimerCountdownComponent implements OnInit, OnChanges, OnDestroy {
   refresh(): void {
     const beforeMillis = this.before?.getTime();
     if (beforeMillis) {
-      const millis = beforeMillis - new Date().getTime();
 
-      const timeLeft = Math.round(millis / 1000);
+      if (!this.paused) { // do not update the time on paused
+        const millis = beforeMillis - new Date().getTime();
 
-      if (this.alreadyVibrateWarning && timeLeft > 20) {
-        this.alreadyVibrateWarning = false;
-      }
-      if (this.alreadyVibrateFault && timeLeft > 0) {
-        this.alreadyVibrateFault = false;
-      }
+        const timeLeft = Math.round(millis / 1000);
 
-      if (timeLeft <= 20 && !this.alreadyVibrateWarning) {
-        this.alreadyVibrateWarning = true;
-        this.vibrate([700]);
-      }
+        if (this.alreadyVibrateWarning && timeLeft > 20) {
+          this.alreadyVibrateWarning = false;
+        }
+        if (this.alreadyVibrateFault && timeLeft > 0) {
+          this.alreadyVibrateFault = false;
+        }
 
-      if (timeLeft > 0) {
-        this.time = timeLeft;
-      } else {
-        this.time = 0;
+        if (timeLeft <= 20 && !this.alreadyVibrateWarning) {
+          this.alreadyVibrateWarning = true;
+          this.vibrate([700]);
+        }
 
-        if (!this.alreadyVibrateFault) {
-          this.alreadyVibrateFault = true;
-          this.vibrate([500, 500, 500, 500, 1000]);
+        if (timeLeft > 0) {
+          this.time = timeLeft;
+        } else {
+          this.time = 0;
+
+          if (!this.alreadyVibrateFault) {
+            this.alreadyVibrateFault = true;
+            this.vibrate([500, 500, 500, 500, 1000]);
+          }
         }
       }
     } else {
