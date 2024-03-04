@@ -2,15 +2,16 @@
 
 <div class="timer-container">
   <div class="timer-countdown">
-    <app-timer-countdown [before]=before></app-timer-countdown>
+    <app-timer-countdown [before]=before [paused]=paused></app-timer-countdown>
   </div>
   <div class="timer-buttons">
-    <button (click)="start()" [disabled]="alreadyBreak" color="primary" mat-raised-button>Casse</button>
-    <button (click)="next()" [disabled]="!before || !alreadyBreak" color="primary" mat-raised-button>Suivant</button>
+    <button (click)="start()" *ngIf="!alreadyBreak" color="primary" mat-raised-button>Casse</button>
+    <button (click)="pause()" *ngIf="alreadyBreak" color="primary" mat-raised-button>Pause</button>
+    <button (click)="next()" [disabled]="!before || !alreadyBreak || paused" color="primary" mat-raised-button>Suivant</button>
   </div>
   <div class="timer-buttons">
-    <button class="extension-a" (click)="extensionA()" [disabled]="!before || !alreadyPlayed || alreadyExtA" mat-raised-button>Extension Jaunes</button>
-    <button class="extension-b" (click)="extensionB()" [disabled]="!before || !alreadyPlayed || alreadyExtB" mat-raised-button>Extension Rouges</button>
+    <button class="extension-a" (click)="extensionA()" [disabled]="!before || !alreadyPlayed || alreadyExtA || paused" mat-raised-button>Extension Jaunes</button>
+    <button class="extension-b" (click)="extensionB()" [disabled]="!before || !alreadyPlayed || alreadyExtB || paused" mat-raised-button>Extension Rouges</button>
   </div>
   <div (click)="restart()" [class.disabled]="!before" class="timer-restart">
     <button (click)="restart()" [disabled]="!before" color="accent" mat-raised-button>Nouvelle Partie</button>

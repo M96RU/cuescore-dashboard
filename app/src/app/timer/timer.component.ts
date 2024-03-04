@@ -14,6 +14,8 @@ export class TimerComponent implements OnInit {
 
   before: Date | undefined;
 
+  paused: boolean = false;
+
   // time: number = 90;
 
   alreadyBreak = false;
@@ -46,8 +48,18 @@ export class TimerComponent implements OnInit {
     this.alreadyBreak = true;
   }
 
+  pause() {
+    if (this.paused) {
+      this.paused = false;
+      this.next();
+    } else {
+      this.paused = true;
+    }
+  }
+
   restart(): void {
     this.timerStop();
+    this.paused = false;
 
     this.alreadyBreak = false;
     this.alreadyPlayed = false;
